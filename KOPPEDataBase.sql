@@ -1,14 +1,29 @@
-create database koppe2;
-use koppa2;
-create table registro(
-docid varchar(50)not null, id int(10) primary key not null, 
-nombrecli varchar(50) not null,
-apellidocli varchar(50) not null, email varchar(50) not null, 
-usuariocli varchar(50), contracli varchar(225) not null,
-rol ENUM('cliente', 'administrador') NOT NULL);
-create table reservas(
-codmesa int primary key not null, numerosillas int not null, 
-fechareserva date not null, horarioreserva time not null);
-describe registro;
-show tables;
-select * from registro;
+CREATE SCHEMA IF NOT EXISTS `Koppe2` DEFAULT CHARACTER SET utf8 ;
+USE `Koppe2` ;
+
+-- -----------------------------------------------------
+-- Table `Koppe2`.`Registro`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `Koppe2`.`Registro` (
+  `ID_Registro` INT NOT NULL AUTO_INCREMENT,
+  `Nombre_Cliente` VARCHAR(45) NOT NULL,
+  `Email_Cliente` VARCHAR(45) NOT NULL,
+  `Contraseña_Usuario` VARCHAR(100) NOT NULL,
+  `Rol_Usuario` VARCHAR(45) NOT NULL,
+  PRIMARY KEY (`ID_Registro`))
+ENGINE = InnoDB;
+
+
+-- -----------------------------------------------------
+-- Table `Koppe2`.`Reservas`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `Koppe2`.`Reservas` (
+  `ID_Reserva` INT NOT NULL AUTO_INCREMENT,
+  `Cantidad_De_Sillas` INT NOT NULL,
+  `Hora_Reserva` TIME NOT NULL,
+  `Fecha_Reserva` DATE NOT NULL,
+  `Cliente_ID_F` INT NOT NULL,
+  PRIMARY KEY (`ID_Reserva`))
+ENGINE = InnoDB;
+
+

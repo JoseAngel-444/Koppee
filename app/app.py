@@ -11,7 +11,7 @@ db_config = {
     'host': os.getenv('DB_HOST', 'localhost'),
     'user': os.getenv('DB_USER', 'root'),
     'password': os.getenv('DB_PASSWORD', ''),
-    'database': os.getenv('DB_NAME', 'koppa')
+    'database': os.getenv('DB_NAME', 'koppe2')
 }
 
 app = Flask(__name__)
@@ -84,18 +84,20 @@ def login():
     if request.method == 'POST':
         email = request.form['email']
         password = request.form['pswd']
+        rol = request.form['role']
 
         cursor = db.cursor()
-        query = "SELECT * FROM registro WHERE email = %s AND contracli = %s"
-        cursor.execute(query, (email, password))
+        query = "SELECT * FROM registro WHERE email = %s AND rol = %s"
+        cursor.execute(query, (email, rol))
         user = cursor.fetchone()
 
-        if user and check_password_hash(user[3], password):
+        if user and check_password_hash(user[6], password):
             session['user_id'] = user[0]
             flash('Inicio de sesion exitoso!', 'success')
             return redirect(url_for('index'))
         else:
-            flash('Correo electronico o contraseña incorrectos.', 'danger')
+            print("Error no funciona la validacion esta mal")
+            flash('Correo electronico, contraseña o rol incorrectos.', 'danger')
 
     return render_template('login.html')
 
