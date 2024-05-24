@@ -114,6 +114,7 @@ button:hover{
     transform: scale(.8);
 }
 
+
 @media (max-width: 576px) {
     .main{
         width: 90%;

@@ -43,7 +43,7 @@ def load_user(user_id):
     else:
         return None
 
-    return User.query.get(int(user_id))
+    
 
 def login_required(f):
     @wraps(f)
@@ -70,7 +70,7 @@ def register():
             hashed_password = generate_password_hash(password, method='pbkdf2:sha256')
 
             cursor = db.cursor()
-            query = "INSERT INTO usuariocli (nombrecli, email, contracli) VALUES (%s, %s, %s)"
+            query = "INSERT INTO registro (nombrecli, email, contracli) VALUES (%s, %s, %s)"
             values = (username, email, hashed_password)
             cursor.execute(query, values)
             db.commit()
