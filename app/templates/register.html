@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <tittle>Registro de Usuario</tittle>
+    </head>
+    <body>
+        <h1>Registro de Usuario</h1>
+        <form action="{{ url_for('register') }}" method="post">
+            <label for="username">Nombre de Usuario:</label>
+            <input type="text" id="username" name="txt" required>
+            <br>
+            <label for="email">Correo electronico:</label>
+            <input type="email" id="email" name="Email" required>
+            <br>
+            <label for="password">contraseña:</label>
+            <input type="password" id="password" name="pswd" required>
+            <br>
+            <button type="submit">Registrarse</button>
+        </form>
+    </body>
+</html>
