@@ -1,0 +1,439 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <title>KOFFIN - Ideas de café para tu cafetería</title>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <meta content="Free Website Template" name="keywords">
+    <meta content="Free Website Template" name="description">
+
+    
+    <link rel="icon" href="/coffee-shop-html-template/img/LogoCFT-Photoroom.png-Photoroom.png" type="image/gif" />
+    <link href="img/favicon.ico" rel="icon">
+
+    
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@200;400&family=Roboto:wght@400;500;700&display=swap" rel="stylesheet"> 
+
+    
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css" rel="stylesheet">
+    <link href="{{url_for('static',filename='css/cafesito.css')}}" rel="stylesheet">
+
+    
+    <link href="{{url_for('static',filename='lib/owlcarousel/assets/owl.carousel_min.css')}}" rel="stylesheet">
+    <link href="{{url_for('static',filename='lib/tempusdominus/css/tempusdominus-bootstrap-4_min.css')}}" rel="stylesheet" />
+
+    <link rel="stylesheet" href="{{url_for('static',filename='/css/style_min.css')}}">
+    
+</head>
+
+<body>
+    
+    <div class="container-fluid p-0 nav-bar">
+        <nav class="navbar navbar-expand-lg bg-none navbar-dark py-3">
+            <a href="{{ url_for('index') }}" class="navbar-brand px-lg-4 m-0">
+                <h1 class="m-0 display-4 text-uppercase text-white">KOFFIN</h1>
+            </a>
+
+            <div id="cafesito">
+                <div class="steam" id="steam1"> </div>
+                <div class="steam" id="steam2"> </div>
+                <div class="steam" id="steam3"> </div>
+                <div class="steam" id="steam4"> </div>
+            
+                <div id="cup">
+                    <div id="cup-body">
+                        <div id="cup-shade"></div>
+                    </div>
+                    <div id="cup-handle"></div>
+                </div>
+            
+                <div id="saucer"></div>
+            
+                <div id="shadow"></div>
+            </div>
+
+            <button type="button" class="navbar-toggler" data-toggle="collapse" data-target="#navbarCollapse">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse justify-content-between" id="navbarCollapse">
+                <div class="navbar-nav ml-auto p-4">
+                    <a href="{{ url_for('index') }}" class="nav-item nav-link">Inicio</a>
+                    <a href="{{ url_for('about') }}" class="nav-item nav-link">Acerca de</a>
+                    <a href="{{ url_for('servicio') }}" class="nav-item nav-link">Servicios</a>
+                    <a href="{{ url_for('menu') }}" class="nav-item nav-link">Menú</a>
+                    <div class="nav-item dropdown">
+                        <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">Páginas</a>
+                        <div class="dropdown-menu text-capitalize">
+                            <a href="{{ url_for('reservation') }}" class="dropdown-item">Reservación</a>
+                            <a href="{{ url_for('testimonial') }}" class="dropdown-item">Referencias</a>
+                        </div>
+                    </div>
+                    <a href="{{ url_for('contact') }}" class="nav-item nav-link">Contactos</a>
+                </div>
+            </div>
+        </nav>
+    </div>
+    
+    <div class="container-fluid p-0 mb-5">
+        <div id="blog-carousel" class="carousel slide overlay-bottom" data-ride="carousel">
+            <div class="carousel-inner">
+                <div class="carousel-item active">
+                    <img class="w-100" src="{{url_for('static',filename='/img/carousel-1.jpg')}}" alt="Image">
+                    <div class="carousel-caption d-flex flex-column align-items-center justify-content-center">
+                        <h1 class="display-1 text-white m-0">CAFÉ</h1>
+                        <h2 class="text-white m-0">* DESDE 2023 *</h2>
+                    </div>
+                </div>
+                <div class="carousel-item">
+                    <img class="w-100" src="{{url_for('static',filename='/img/carousel-2.jpg')}}" alt="Image">
+                    <div class="carousel-caption d-flex flex-column align-items-center justify-content-center">
+                        <h2 class="text-primary font-weight-medium m-0">Estamos para ofrecer nuestros servicios</h2>
+                        <h1 class="display-1 text-white m-0">CAFÉ</h1>
+                        <h2 class="text-white m-0">* Actualmente desde el 2024 *</h2>
+                    </div>
+                </div>
+            </div>
+            <a class="carousel-control-prev" href="#blog-carousel" data-slide="prev">
+                <span class="carousel-control-prev-icon"></span>
+            </a>
+            <a class="carousel-control-next" href="#blog-carousel" data-slide="next">
+                <span class="carousel-control-next-icon"></span>
+            </a>
+        </div>
+    </div>
+    
+
+
+    <div class="container-fluid py-5">
+        <div class="container">
+            <div class="section-title">
+                <h4 class="text-primary text-uppercase" style="letter-spacing: 5px;">Sobre Nosotros</h4>
+                <h1 class="display-4">Sirviendo actualmente desde 2024</h1>
+            </div>
+            <div class="row">
+                <div class="col-lg-4 py-0 py-lg-5">
+                    <h1 class="mb-3">Nuestra historia</h1>
+                    <h5 class="mb-3">"Un café compartido es un momento de conexión, una pausa en el ajetreo del día para disfrutar de la buena compañía y los pequeños placeres de la vida."</h5>
+                    <p>Nuestra historia comenzó con la pasión por el café y el deseo de crear un refugio acogedor donde cada taza cuente una historia. Desde nuestros inicios, nos hemos dedicado a ofrecer una experiencia excepcional centrada en la calidad del café, la hospitalidad genuina y el compromiso con la sostenibilidad. A través de cada taza que servimos, seguimos escribiendo nuestra historia como un lugar donde los amantes del café pueden conectar, relajarse y disfrutar de momentos memorables.</p>
+                    <a href="" class="btn btn-secondary font-weight-bold py-2 px-4 mt-2">Saber Más</a>
+                </div>
+                <div class="col-lg-4 py-5 py-lg-0" style="min-height: 500px;">
+                    <div class="position-relative h-100">
+                        <img class="position-absolute w-100 h-100" src="{{url_for('static',filename='/img/about.png')}}" style="object-fit: cover;">
+                    </div>
+                </div>
+                <div class="col-lg-4 py-0 py-lg-5">
+                    <h1 class="mb-3">Nuestra Visión</h1>
+                    <p>Nuestra visión es crear un refugio acogedor donde cada taza de café cuente una historia. Nos esforzamos por ser el destino preferido para los amantes del café, ofreciendo una experiencia excepcional centrada en la pasión por el café, la hospitalidad auténtica y la sostenibilidad.</p>
+                    <h5 class="mb-3"><i class="fa fa-check text-primary mr-3"></i>Pasión por el café</h5>
+                    <h5 class="mb-3"><i class="fa fa-check text-primary mr-3"></i>Hospitalidad auténtica</h5>
+                    <h5 class="mb-3"><i class="fa fa-check text-primary mr-3"></i>Sostenibilidad</h5>
+                    <a href="" class="btn btn-primary font-weight-bold py-2 px-4 mt-2">Saber más</a>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+
+
+    <div class="container-fluid pt-5">
+        <div class="container">
+            <div class="section-title">
+                <h4 class="text-primary text-uppercase" style="letter-spacing: 5px;">Nuestros Servicios</h4>
+                <h1 class="display-4">Granos frescos y orgánicos</h1>
+            </div>
+            <div class="row">
+                <div class="col-lg-6 mb-5">
+                    <div class="row align-items-center">
+                        <div class="col-sm-5">
+                            <img class="img-fluid mb-3 mb-sm-0" src="{{url_for('static',filename='/img/service-1.jpg')}}" alt="">
+                        </div>
+                        <div class="col-sm-7">
+                            <h4><i class="fa fa-truck service-icon"></i>La entrega a domicilio más rápida y eficiente.</h4>
+                            <p class="m-0">En KOFFIN, nos comprometemos a brindarte la entrega a domicilio más rápida y eficiente, 
+                                "Disfruta de tu café favorito en minutos. Nuestra entrega a domicilio es rápida, eficiente y sin complicaciones. 
+                                ¡Haz tu pedido y disfruta de la comodidad en cada sorbo!".</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-6 mb-5">
+                    <div class="row align-items-center">
+                        <div class="col-sm-5">
+                            <img class="img-fluid mb-3 mb-sm-0" src="{{url_for('static',filename='/img/service-2.jpg')}}" alt="">
+                        </div>
+                        <div class="col-sm-7">
+                            <h4><i class="fa fa-coffee service-icon"></i>Granos de café frescos.</h4>
+                            <p class="m-0">"En KOFFIN, solo utilizamos los granos de café más frescos para garantizar una experiencia de sabor inigualable en cada taza. 
+                                Descubre la diferencia que la frescura hace en cada sorbo."</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-6 mb-5">
+                    <div class="row align-items-center">
+                        <div class="col-sm-5">
+                            <img class="img-fluid mb-3 mb-sm-0" src="{{url_for('static',filename='/img/service-3.jpg')}}" alt="">
+                        </div>
+                        <div class="col-sm-7">
+                            <h4><i class="fa fa-award service-icon"></i>Café de la mejor calidad.</h4>
+                            <p class="m-0">"En KOFFIN, nos enorgullecemos de ofrecerte café de la mejor calidad, 
+                                seleccionado con esmero y preparado con pasión para brindarte una experiencia sensorial incomparable. Descubre el sabor excepcional que solo encontrarás aquí."</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-6 mb-5">
+                    <div class="row align-items-center">
+                        <div class="col-sm-5">
+                            <img class="img-fluid mb-3 mb-sm-0" src="{{url_for('static',filename='/img/service-4.jpg')}}" alt="">
+                        </div>
+                        <div class="col-sm-7">
+                            <h4><i class="fa fa-table service-icon"></i>Reserva de mesa en línea.</h4>
+                            <p class="m-0">"¡Garantiza tu lugar favorito con solo unos clics! Haz tu reserva de mesa en línea ahora 
+                                y asegura un espacio en KOFFIN para disfrutar de momentos inolvidables con amigos y familia."</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+
+
+    <div class="offer container-fluid my-5 py-5 text-center position-relative overlay-top overlay-bottom">
+        <div class="container py-5">
+            <h1 class="display-3 text-primary mt-3">50% de descuento</h1>
+            <h1 class="text-white mb-3">Oferta especial del domingo</h1>
+            <h4 class="text-white font-weight-normal mb-4 pb-3">Solo para el domingo del 14 de enero al 26 de mayo de 2024</h4>
+            <form class="form-inline justify-content-center mb-4">
+                <div class="input-group">
+                    <input type="text" class="form-control p-4" placeholder="Su correo" style="height: 60px;">
+                    <div class="input-group-append">
+                        <button class="btn btn-primary font-weight-bold px-4" type="submit">Unete</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+    
+    
+
+    <div class="container-fluid pt-5">
+        <div class="container">
+            <div class="section-title">
+                <h4 class="text-primary text-uppercase" style="letter-spacing: 5px;">Menú y Precios</h4>
+                <h1 class="display-4">Precios competitivos</h1>
+            </div>
+            <div class="row">
+                <div class="col-lg-6">
+                    <h1 class="mb-5">Café caliente</h1>
+                    <div class="row align-items-center mb-5">
+                        <div class="col-4 col-sm-3">
+                            <img class="w-100 rounded-circle mb-3 mb-sm-0" src="{{url_for('static',filename='/img/menu-1.jpg')}}" alt="">
+                            <h5 class="menu-price">$5000</h5>
+                        </div>
+                        <div class="col-8 col-sm-9">
+                            <h4>Café negro</h4>
+                            <p class="m-0">Sumérgete en la intensidad de nuestro café negro, una mezcla robusta que despierta tus sentidos con su aroma profundo y su sabor audaz.</p>
+                        </div>
+                    </div>
+                    <div class="row align-items-center mb-5">
+                        <div class="col-4 col-sm-3">
+                            <img class="w-100 rounded-circle mb-3 mb-sm-0" src="{{url_for('static',filename='/img/menu-2.jpg')}}" alt="">
+                            <h5 class="menu-price">$5000</h5>
+                        </div>
+                        <div class="col-8 col-sm-9">
+                            <h4>Café Chocolete</h4>
+                            <p class="m-0">Déjate tentar por el delicioso matrimonio entre el café y el chocolate en nuestra exquisita bebida de Café Chocolete. Cada sorbo es un viaje de indulgencia, 
+                                fusionando la suavidad del chocolate con la energía del café.</p>
+                                
+                        </div>
+                    </div>
+                    <div class="row align-items-center mb-5">
+                        <div class="col-4 col-sm-3">
+                            <img class="w-100 rounded-circle mb-3 mb-sm-0" src="{{url_for('static',filename='/img/menu-3.jpg')}}" alt="">
+                            <h5 class="menu-price">$4500</h5>
+                        </div>
+                        <div class="col-8 col-sm-9">
+                            <h4>Café con leche</h4>
+                            <p class="m-0">Disfruta de un abrazo reconfortante en forma de Café con Leche. 
+                                Nuestra mezcla perfecta de café suave y leche cremosa te envuelve en un sabor acogedor que te hace sentir como en casa.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-6">
+                    <h1 class="mb-5">Café Frio</h1>
+                    <div class="row align-items-center mb-5">
+                        <div class="col-4 col-sm-3">
+                            <img class="w-100 rounded-circle mb-3 mb-sm-0" src="{{url_for('static',filename='/img/menu-1.jpg')}}" alt="">
+                            <h5 class="menu-price">$2500</h5>
+                        </div>
+                        <div class="col-8 col-sm-9">
+                            <h4>Café negro</h4>
+                            <p class="m-0">Refréscate y revive con nuestro café frío, una explosión de frescura en cada sorbo. 
+                                Perfecto para esos días calurosos o para aquellos que prefieren una experiencia de café refrescante y revitalizante.</p>
+                        </div>
+                    </div>
+                    <div class="row align-items-center mb-5">
+                        <div class="col-4 col-sm-3">
+                            <img class="w-100 rounded-circle mb-3 mb-sm-0" src="{{url_for('static',filename='/img/menu-2.jpg')}}" alt="">
+                            <h5 class="menu-price">$3000</h5>
+                        </div>
+                        <div class="col-8 col-sm-9">
+                            <h4>Café chocolete</h4>
+                            <p class="m-0">Sumérgete en el placer helado con nuestro café chocolete frío. 
+                                La combinación irresistible de café con el toque dulce y refrescante del chocolate te envuelve en una experiencia deliciosa y refrescante. </p>
+                        </div>
+                    </div>
+                    <div class="row align-items-center mb-5">
+                        <div class="col-4 col-sm-3">
+                            <img class="w-100 rounded-circle mb-3 mb-sm-0" src="{{url_for('static',filename='/img/menu-3.jpg')}}" alt="">
+                            <h5 class="menu-price">$5000</h5>
+                        </div>
+                        <div class="col-8 col-sm-9">
+                            <h4>Café con leche</h4>
+                            <p class="m-0">Refréscate con la suavidad reconfortante de nuestro Café con Leche Frío. La mezcla perfecta de café y leche fría te ofrece un equilibrio refrescante y satisfactorio en cada sorbo. 
+                                Una delicia cremosa para disfrutar en cualquier momento del día.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+
+
+    <div class="container-fluid my-5">
+        <div class="container">
+            <div class="reservation position-relative overlay-top overlay-bottom">
+                <div class="row align-items-center">
+                    <div class="col-lg-6 my-5 my-lg-0">
+                        <div class="p-5">
+                            <div class="mb-4">
+                                <h1 class="display-3 text-primary">30% de descuento</h1>
+                                <h1 class="text-white">Para reservas en línea</h1>
+                            </div>
+                            <p class="text-white">Aprovecha nuestra oferta, ¡Reserva ya tu mesa en nuestra cafetería para que disfrutes de nuestras preparaciones y tengas la mejor experiencia!...</p>
+                            <ul class="list-inline text-white m-0">
+                                <li class="py-2"><i class="fa fa-check text-primary mr-3"></i>Excelente atención</li>
+                                <li class="py-2"><i class="fa fa-check text-primary mr-3"></i>Calidad y sabor en cada uno de tus pedidos</li>
+                                <li class="py-2"><i class="fa fa-check text-primary mr-3"></i>Experiencias inolvidables</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="col-lg-6">
+                        <div class="text-center p-5" style="background: rgba(51, 33, 29, .8);">
+                            <h1 class="text-white mb-4 mt-5">Reserva tu mesa</h1>
+                            <form class="mb-5">
+                                <div class="form-group">
+                                    <input type="text" class="form-control bg-transparent border-primary p-4" placeholder="Nombre"
+                                        required="required" />
+                                </div>
+                                <div class="form-group">
+                                    <input type="email" class="form-control bg-transparent border-primary p-4" placeholder="Correo electronico"
+                                        required="required" />
+                                </div>
+                                <div class="form-group">
+                                    <div class="date" id="date" data-target-input="nearest">
+                                        <input type="text" class="form-control bg-transparent border-primary p-4 datetimepicker-input" placeholder="Fecha" data-target="#date" data-toggle="datetimepicker"/>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <div class="time" id="time" data-target-input="nearest">
+                                        <input type="text" class="form-control bg-transparent border-primary p-4 datetimepicker-input" placeholder="Hora" data-target="#time" data-toggle="datetimepicker"/>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <select class="custom-select bg-transparent border-primary px-4" style="height: 49px;">
+                                        <option selected>Personas</option>
+                                        <option value="1">Persona 1</option>
+                                        <option value="2">Persona 2</option>
+                                        <option value="3">Persona 3</option>
+                                        <option value="3">Persona 4</option>
+                                    </select>
+                                </div>
+                                
+                                <div>
+                                    <button class="btn btn-primary btn-block font-weight-bold py-3" type="submit">Reservar ahora</button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+
+
+    <div class="container-fluid footer text-white mt-5 pt-5 px-0 position-relative overlay-top">
+        <div class="row mx-0 pt-5 px-sm-3 px-lg-5 mt-4">
+            <div class="col-lg-3 col-md-6 mb-5">
+                <h4 class="text-white text-uppercase mb-4" style="letter-spacing: 3px;">Póngase en contacto</h4>
+                <p><i class="fa fa-map-marker-alt mr-2"></i>Colombia - Bogota DC - calle: 43 AV 7</p>
+                <p><i class="fa fa-phone-alt mr-2"></i>321-249-6589</p>
+                <p class="m-0"><i class="fa fa-envelope mr-2"></i>koppee149@gmail.com</p>
+            </div>
+            <div class="col-lg-3 col-md-6 mb-5">
+                <h4 class="text-white text-uppercase mb-4" style="letter-spacing: 3px;">Siguenos</h4>
+                <p>Nuestras redes sociales estan esperandote con la mejor variedad de información y comentarios positivos.</p>
+                <div class="d-flex justify-content-start">
+                    <a class="btn btn-lg btn-outline-light btn-lg-square mr-2" href="#"><i class="fab fa-twitter"></i></a>
+                    <a class="btn btn-lg btn-outline-light btn-lg-square mr-2" href="https://www.facebook.com/profile.php?id=61558557609401"><i class="fab fa-facebook-f"></i></a>
+                    <a class="btn btn-lg btn-outline-light btn-lg-square mr-2" href="#"><i class="fab fa-linkedin-in"></i></a>
+                    <a class="btn btn-lg btn-outline-light btn-lg-square" href="https://www.instagram.com/koppeecafe?igsh=MXZuNDZncWd2c2x6bA=="><i class="fab fa-instagram"></i></a>
+                </div>
+            </div>
+            <div class="col-lg-3 col-md-6 mb-5">
+                <h4 class="text-white text-uppercase mb-4" style="letter-spacing: 3px;">Horario de apertura</h4>
+                <div>
+                    <h6 class="text-white text-uppercase">Lunes - Viernes</h6>
+                    <p>8.00 AM - 8.00 PM</p>
+                    <h6 class="text-white text-uppercase">Sábado - Domingo</h6>
+                    <p>2.00 PM - 8.00 PM</p>
+                </div>
+            </div>
+            <div class="col-lg-3 col-md-6 mb-5">
+                <h4 class="text-white text-uppercase mb-4" style="letter-spacing: 3px;">Boletin</h4>
+                <p>No esperes más, unete a nuestro boletín informativo, para que nos compartas tu gran experiencia.</p>
+                <div class="w-100">
+                    <div class="input-group">
+                        <input type="text" class="form-control border-light" style="padding: 25px;" placeholder="Tu correo">
+                        <div class="input-group-append">
+                            <button class="btn btn-primary font-weight-bold px-3">Únete</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="container-fluid text-center text-white border-top mt-4 py-4 px-sm-3 px-md-5" style="border-color: rgba(256, 256, 256, .1) !important;">
+            <p class="mb-2 text-white">Derechos de autor &copy; <a class="font-weight-bold" href="#">Dominio</a>. Todos los derechos reservados.</a></p>
+            <p class="m-0 text-white">Diseñado por <a class="font-weight-bold" href="#">@Jose Angel @Diego Mesa @Johan Gonzalez @Daniel Cruz</a></p>
+        </div>
+    </div>
+    
+
+
+    <a href="#" class="btn btn-lg btn-primary btn-lg-square back-to-top"><i class="fa fa-angle-double-up"></i></a>
+
+
+    
+
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.bundle.min.js"></script>
+    <script src="/app/static/lib/easing/easing.min.js"></script>
+    <script src="/app/static/lib/waypoints/waypoints.min.js"></script>
+    <script src="/app/static/lib/owlcarousel/owl.carousel.min.js"></script>
+    <script src="/app/static/lib/tempusdominus/js/moment.min.js"></script>
+    <script src="/app/static/js/moment-timezone.min.js"></script>
+    <script src="/app/static/lib/tempusdominus/js/tempusdominus-bootstrap-4.min.js"></script>
+
+    <!-- Contact Javascript File -->
+    <script src="/app/static/mail/jqBootstrapValidation.min.js"></script>
+    <script src="/app/static/mail/contact.js"></script>
+
+    <!-- Template Javascript -->
+    <script src="/app/static/js/main.js"></script>
+</body>
+
+</html>
