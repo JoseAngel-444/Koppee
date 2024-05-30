@@ -33,7 +33,7 @@ class Usuario:
 @login_manager.user_loader
 def load_user(user_id):
     cursor = db.cursor()
-    query = "SELECT * FROM registro WHERE id = %s"
+    query = "SELECT * FROM Registro WHERE 	ID_Registro = %s"
     cursor.execute(query, (user_id))
     user_data = cursor.fetchone()
 
@@ -59,9 +59,11 @@ def login_required(f):
 def register():
 
         if request.method == 'POST':
+            print(request.form)
             username = request.form ['txt']
             email = request.form['Email']
             password = request.form['pswd']
+
 
             if not username or not email or not password:
                 flash('Por favor, completa todos los campos.', 'danger')
@@ -70,7 +72,7 @@ def register():
             hashed_password = generate_password_hash(password, method='pbkdf2:sha256')
 
             cursor = db.cursor()
-            query = "INSERT INTO registro (nombrecli, email, contracli) VALUES (%s, %s, %s)"
+            query = "INSERT INTO Registro (Nombre_Cliente, Email_Cliente, Contraseña_Usuario) VALUES (%s, %s, %s)"
             values = (username, email, hashed_password)
             cursor.execute(query, values)
             db.commit()
@@ -84,14 +86,27 @@ def login():
     if request.method == 'POST':
         email = request.form['email']
         password = request.form['pswd']
-        rol = request.form['role']
+        rol = request.form['role'] 
 
         cursor = db.cursor()
-        query = "SELECT * FROM registro WHERE email = %s AND rol = %s"
-        cursor.execute(query, (email, rol))
+        query = "SELECT * FROM registro WHERE Email_Cliente = %s"
+        cursor.execute(query, (email,))
         user = cursor.fetchone()
 
-        if user and check_password_hash(user[6], password):
+        print(email, "/ ", password, "/ ", rol )
+        print(user)
+
+        print(user[3])
+
+
+        xd = check_password_hash("pbkdf2:sha256:600000$Se8ftQtxQqgD9yr0$06445b6139b4199b43202aa7ca97cbc91bb16e8971b43496d5829f31b15203", "Diego")
+        print(xd)
+
+        validacion = check_password_hash(user[3], password)
+        print("Aca esta la validaciónn: ")
+        print(validacion)
+
+        if user and check_password_hash(user[3], password):
             session['user_id'] = user[0]
             flash('Inicio de sesion exitoso!', 'success')
             return redirect(url_for('index'))
