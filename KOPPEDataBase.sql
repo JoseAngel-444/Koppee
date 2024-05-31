@@ -8,7 +8,7 @@ CREATE TABLE IF NOT EXISTS `Koppe2`.`Registro` (
   `ID_Registro` INT NOT NULL AUTO_INCREMENT,
   `Nombre_Cliente` VARCHAR(45) NOT NULL,
   `Email_Cliente` VARCHAR(45) NOT NULL,
-  `Contraseña_Usuario` VARCHAR(100) NOT NULL,
+  `Contraseña_Usuario` VARCHAR(150) NOT NULL,
   `Rol_Usuario` VARCHAR(45) NOT NULL,
   PRIMARY KEY (`ID_Registro`))
 ENGINE = InnoDB;

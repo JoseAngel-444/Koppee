@@ -86,39 +86,40 @@ def login():
     if request.method == 'POST':
         email = request.form['email']
         password = request.form['pswd']
-        rol = request.form['role'] 
+        # rol = request.form['role'] 
 
         cursor = db.cursor()
-        query = "SELECT * FROM registro WHERE Email_Cliente = %s"
+        query = "SELECT * FROM Registro WHERE Email_Cliente = %s"
         cursor.execute(query, (email,))
         user = cursor.fetchone()
 
-        print(email, "/ ", password, "/ ", rol )
-        print(user)
+        print(email, "/ ", password)
+        
 
-        print(user[3])
+        if user:
+            stored_hash = user[3]
+
+            validacion = check_password_hash(stored_hash, password)
+            print("Aca esta la validacion: ", validacion)
 
 
-        xd = check_password_hash("pbkdf2:sha256:600000$Se8ftQtxQqgD9yr0$06445b6139b4199b43202aa7ca97cbc91bb16e8971b43496d5829f31b15203", "Diego")
-        print(xd)
 
-        validacion = check_password_hash(user[3], password)
-        print("Aca esta la validaciónn: ")
-        print(validacion)
-
-        if user and check_password_hash(user[3], password):
+        if validacion:
             session['user_id'] = user[0]
             flash('Inicio de sesion exitoso!', 'success')
             return redirect(url_for('index'))
         else:
-            print("Error no funciona la validacion esta mal")
+            print("Error en la validacion de la contraseña")
             flash('Correo electronico, contraseña o rol incorrectos.', 'danger')
+    else:
+        print("Usuario no encontrado")
 
     return render_template('login.html')
 
-@app.route('/index')
+@app.route('/index', methods = ['GET', 'POST']) 
 def index():
-    return render_template('index.html')
+    
+        return render_template('index.html')
 
 @app.route('/about') 
 def about():
