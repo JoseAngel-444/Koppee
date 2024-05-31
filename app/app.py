@@ -147,12 +147,12 @@ def reservation():
         
 
         cursor = db.cursor()
-        query = "INSERT INTO reservas(codmesa, numerosillas, fechareserva, horarioreserva) VALUES (%s, %s, %s, %s)"
+        query = "INSERT INTO Reservas(ID_Reserva, Cantidad_De_Sillas, Fecha_Reserva, Hora_Reserva) VALUES (%s, %s, %s, %s)"
         values = (cod_mesa, num_sillas, fecha_reserva, horario_reserva)
         cursor.execute(query, values)
         db.commit()
 
-        logging.debug("Procesando reserva...")
+        flash("Procesando reserva...")
         
         flash('Reserva creada exitosamente!', 'success')
         return redirect(url_for('success'))
@@ -177,10 +177,6 @@ def testimonial():
 def servicio():
     return render_template('service.html')
 
-@app.route('/cerrarsesion', methods= ['GET', 'POST'])
-def cerrarsesion():
-
-    return render_template('cerrarsesion.html')
 
 
 
