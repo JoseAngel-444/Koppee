@@ -3,13 +3,14 @@ from flask_login import LoginManager
 from functools import wraps
 import mysql.connector
 from werkzeug.security import generate_password_hash, check_password_hash
-import os
 import logging
+
 
 app = Flask(__name__)
 login_manager = LoginManager()
 login_manager.init_app(app)
 app.secret_key = '08400840'
+
 
 db = mysql.connector.connect(
     host="localhost",
@@ -88,16 +89,20 @@ def login():
         email = request.form['email']
         password = request.form['pswd']
 
+        rol = request.form['role']
+
         cursor = db.cursor()
-        query = "SELECT * FROM registro WHERE email = %s AND contracli = %s"
-        cursor.execute(query, (email, password))
+        query = "SELECT * FROM registro WHERE email = %s AND rol = %s"
+        cursor.execute(query, (email, rol))
         user = cursor.fetchone()
 
-        if user and check_password_hash(user[3], password):
+        if user and check_password_hash(user[6], password):
+
             session['user_id'] = user[0]
             flash('Inicio de sesion exitoso!', 'success')
             return redirect(url_for('index'))
         else:
+
             flash('Correo electronico o contraseña incorrectos.', 'danger')
 
     return render_template('login.html')
