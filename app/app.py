@@ -173,9 +173,14 @@ def testimonial():
     return render_template('testimonial.html')
 
 
-@app.route('/servicio')
+@app.route('/service')
 def servicio():
     return render_template('service.html')
+
+@app.route('/cerrarsesion', methods= ['GET', 'POST'])
+def cerrarsesion():
+
+    return render_template('cerrarsesion.html')
 
 
 
