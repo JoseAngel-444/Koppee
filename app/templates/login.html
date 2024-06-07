@@ -10,16 +10,22 @@
 
 </head>
 <body>
+    
 <div class="main">
     <input type="checkbox" id="chk" aria-hidden="true">
     <div class="signup">
         <form action="{{ url_for('register') }} " method="post">
+
+
             <label for="chk" aria-hidden="true">Registrarse</label>
             <input type="text" name="txt" placeholder="Nombre de usuario" required="">
             <input type="email" name="Email" placeholder="Correo electronico" required="">
             <input type="password" name="pswd" placeholder="Clave" required="">
             <button type="submit">Registrarse</button>
         </form>
+
+
+
     </div>
 
     <div class="login">
@@ -36,13 +42,7 @@
         </form>
     </div>
 </div>
-{% with messages = get_flashed_messages(with_categories=true) %}
-    {% if messages %}
-        {% for category, message in messages %}
-            <div class="alert alert-{{ category }}">{{ message }}</div>
-        {% endfor %}
-    {% endif %}
-{% endwith %}
+
 
 </body>
 </html>

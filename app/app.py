@@ -143,12 +143,17 @@ def reservation():
 
         if not cod_mesa.isdigit() or not num_sillas.isdigit():
             flash('Por favor, ingresa numeros validos para el codigo de mesa y el numero de sillas.', 'danger')
-            return render_template ('success.html')
+            return render_template ('reservation.html')
         
+        if 'user_id' not in session:
+            flash('Debes iniciar sesion primero.', 'danger')
+            return redirect(url_for('login'))
+        
+        usuario_id = session['user_id']        
 
         cursor = db.cursor()
         query = "INSERT INTO Reservas(ID_Reserva, Cantidad_De_Sillas, Fecha_Reserva, Hora_Reserva) VALUES (%s, %s, %s, %s)"
-        values = (cod_mesa, num_sillas, fecha_reserva, horario_reserva)
+        values = (num_sillas, fecha_reserva, horario_reserva, usuario_id)
         cursor.execute(query, values)
         db.commit()
 
@@ -156,8 +161,9 @@ def reservation():
         
         flash('Reserva creada exitosamente!', 'success')
         return redirect(url_for('success'))
-    
-    return render_template('reservation.html')
+    else:
+        flash('Por favor, completa todos los campos.', 'danger')
+        return render_template('reservation.html')
 
 @app.route('/success')
 def success():
@@ -176,6 +182,11 @@ def testimonial():
 @app.route('/service')
 def servicio():
     return render_template('service.html')
+
+
+@app.route('/sabermas1')
+def saber_mas():
+    return render_template('sabermas1.html')
 
 
 
