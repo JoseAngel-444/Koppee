@@ -1,56 +1,48 @@
 <!DOCTYPE html>
-
 <html lang="en">
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width, initial-scale=1.0">
-        <title>Iniciar sesion y registrarse</title>
-        <link rel="stylesheet" href="{{url_for('static',filename='/css/login.css')}}">
-        <link rel="stylesheet" href="{{url_for('static',filename='/css/login.css')}}">
-    
-        <link rel="icon" href="{{url_for('static',filename='/img/LogoCFT-Photoroom')}}" type="image/gif" />
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width, initial-scale=1.0">
+    <title>Iniciar sesión y registrarse</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='/img/LogoCFT-Photoroom') }}" type="image/gif" />
+    <link rel="stylesheet" href="{{url_for('static',filename='/css/login.css')}}">
+    <link rel="stylesheet" href="{{url_for('static',filename='/css/login.css')}}">
 
-    </head>
-    <body>
+</head>
+<body>
+<div class="main">
+    <input type="checkbox" id="chk" aria-hidden="true">
+    <div class="signup">
+        <form action="{{ url_for('register') }} " method="post">
+            <label for="chk" aria-hidden="true">Registrarse</label>
+            <input type="text" name="txt" placeholder="Nombre de usuario" required="">
+            <input type="email" name="Email" placeholder="Correo electronico" required="">
+            <input type="password" name="pswd" placeholder="Clave" required="">
+            <button type="submit">Registrarse</button>
+        </form>
+    </div>
 
-        <!DOCTYPE html>
-        <html>
-            <head>
-                <link rel="stylesheet" type="text/css" href="slide navbar login.css">
-                
-            </head>
+    <div class="login">
+        <form action="{{ url_for('login') }}" method="post">
+            <label for="chk" aria-hidden="true">Ingresar</label>
+            <input type="email" name="email" placeholder="Correo electronico" required="">
+            <input type="password" name="pswd" placeholder="Clave" required="">
+            <select name="role" required="">
+                <option value="cliente">Cliente</option>
+                <option value="administrador">Administrador</option>
+            </select>
+            <button type="submit">Ingresar</button>
+            <label class="forgot-password">¿Olvidaste tu contraseña?</label>
+        </form>
+    </div>
+</div>
+{% with messages = get_flashed_messages(with_categories=true) %}
+    {% if messages %}
+        {% for category, message in messages %}
+            <div class="alert alert-{{ category }}">{{ message }}</div>
+        {% endfor %}
+    {% endif %}
+{% endwith %}
 
-            <body>
-
-
-                <div class="main">
-                    <input type="checkbox" id="chk" aria-hidden="true">
-
-                    <div class="signup">
-                        <form>
-
-                            <label for="chk" aria-hidden="true">Registrarse</label>
-                            <input type="text" name="txt" placeholder="Nombre de usuario" required="">
-                            <input type="email" name="Email" placeholder="Correo electronico" required="">
-                             <input type="password" name="pswd" placeholder="Clave" required="">
-                            <button>Registrarse</button>
-
-                        </form>
-                    </div>
-
-                    <div class="login">
-                        <form>
-
-                            <label for="chk" aria-hidden="true">Ingresar</label>
-                            <input type="email" name="email" placeholder="Correo electronico" required="">
-                            <input type="password" name="pswd" placeholder="Clave" required="">
-                            <a href="{{ url_for('index') }}"><button type="button">Ingresar</button>
-                            
-                            <label class="forgot-password">¿Olvidaste tu contraseña? </label>
-                        </form>
-                    </div>
-                </div>
-            </body>
-        </html>
-    </body>
+</body>
 </html>
