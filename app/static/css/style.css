@@ -9653,6 +9653,11 @@ h6,
   background-size: cover;
 }
 
+.form-group-reservation
+{
+  color: white;
+}
+
 .form-group-reservation::placeholder
 {
   color: white;

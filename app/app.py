@@ -1,30 +1,4 @@
 from flask import Flask, render_template, redirect, request, url_for, flash, session
-<<<<<<< HEAD
-import mysql.connector, base64
-from werkzeug.security import generate_password_hash, check_password_hash
-
-app = Flask(__name__)
-app.secret_key = 'your_secret_key'
-
-db = mysql.connector.connect(
-    host="localhost",
-    user="root",
-    password="",
-    database="koppa"
-)
-
-
-@app.route('/index')
-def index():
-    return render_template('index.html')
-
-
-
-@app.route('/')
-def login():
-    return render_template('login.html')
-
-=======
 from flask_login import LoginManager
 from functools import wraps
 import mysql.connector
@@ -112,23 +86,18 @@ def login():
     if request.method == 'POST':
         email = request.form['email']
         password = request.form['pswd']
-        # rol = request.form['role'] 
+        role = request.form['role'] 
 
         cursor = db.cursor()
-        query = "SELECT * FROM Registro WHERE Email_Cliente = %s"
-        cursor.execute(query, (email,))
+        query = "SELECT * FROM Registro WHERE Email_Cliente = %s AND Rol_Usuario = %s"
+        cursor.execute(query, (email, role))
         user = cursor.fetchone()
-
-        print(email, "/ ", password)
         
 
-        if user:
-            stored_hash = user[3]
+        stored_hash = user[3]
 
-            validacion = check_password_hash(stored_hash, password)
-            print("Aca esta la validacion: ", validacion)
-
-
+        validacion = check_password_hash(stored_hash, password)
+        print("Aca esta la validacion: ", validacion)
 
         if validacion:
             session['user_id'] = user[0]
@@ -147,7 +116,6 @@ def index():
     
         return render_template('index.html')
 
->>>>>>> master
 @app.route('/about') 
 def about():
     return render_template('about.html')
@@ -158,24 +126,39 @@ def menu():
     return render_template('menu.html')
 
 
-<<<<<<< HEAD
-@app.route('/reservation')
-def reservation():
-    return render_template('reservation.html')
-
-=======
 logging.basicConfig(level=logging.DEBUG)
 
 @app.route('/reservation', methods= ['GET', 'POST'])
 def reservation():
     if request.method == 'POST':
-        cod_mesa = request.form['cod_mesa']
-        num_sillas = request.form['num_sillas']
-        fecha_reserva = request.form['fecha_reserva']
-        horario_reserva = request.form['horario_reserva']
+        Nombre_User = request.form['Name_Form']
+        Email_User = request.form['Email_Form']
+        Fecha_Reserva = request.form['Date_Form']
+        Hora_Reserva = request.form['Hora_Form']
+        Num_Personas_Reserva = request.form['Num_Personas']
 
-        if not cod_mesa.isdigit() or not num_sillas.isdigit():
-            flash('Por favor, ingresa numeros validos para el codigo de mesa y el numero de sillas.', 'danger')
+        cursor = db.cursor()
+        query = "SELECT * FROM Registro WHERE Email_Cliente = %s AND Nombre_Cliente = %s;"
+        cursor.execute(query, (Email_User, Nombre_User))
+        user = cursor.fetchone();
+        
+        ID_User = user[0]
+        
+        if user is None:
+            
+            print("Usuario No encontrado, verifique que el correo y contraseña sean validos. ")
+            
+        else:
+            
+            print("Si entra al else.  :D .")
+            
+            cursor = db.cursor()
+            query = "INSERT INTO Reservas (Cantidad_De_Sillas, Hora_Reserva, Fecha_Reserva, Cliente_ID_F) VALUES (%s, %s, %s, %s)"
+            values = (Num_Personas_Reserva, Hora_Reserva, Fecha_Reserva, ID_User)
+            cursor.execute(query, values)
+            db.commit()
+
+
             return render_template ('success.html')
         
 
@@ -196,7 +179,6 @@ def reservation():
 def success():
     return render_template('success.html')
 
->>>>>>> master
 
 @app.route('/contact')
 def contact():
@@ -207,18 +189,11 @@ def testimonial():
     return render_template('testimonial.html')
 
 
-<<<<<<< HEAD
-@app.route('/servicio')
-=======
 @app.route('/service')
->>>>>>> master
 def servicio():
     return render_template('service.html')
 
 
 
-<<<<<<< HEAD
-=======
 
->>>>>>> master
 app.run(debug=True, port=5005)
