@@ -1914,7 +1914,7 @@ pre code {
 }
 
 .form-control::placeholder {
-  color: #6c757d;
+  color: #ffffff;
   opacity: 1;
 }
 
@@ -9651,4 +9651,10 @@ h6,
   background-position: top;
   background-repeat: no-repeat;
   background-size: cover;
+}
+
+.form-group-reservation::placeholder
+{
+  color: white;
+  opacity: 1;
 }
