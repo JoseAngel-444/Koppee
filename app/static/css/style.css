@@ -9652,14 +9652,3 @@ h6,
   background-repeat: no-repeat;
   background-size: cover;
 }
-
-.form-group-reservation
-{
-  color: white;
-}
-
-.form-group-reservation::placeholder
-{
-  color: white;
-  opacity: 1;
-}

@@ -130,7 +130,12 @@ logging.basicConfig(level=logging.DEBUG)
 
 @app.route('/reservation', methods= ['GET', 'POST'])
 def reservation():
+    
+    print("En la página web.")
+    
     if request.method == 'POST':
+        
+        print("Si entra :)")
         Nombre_User = request.form['Name_Form']
         Email_User = request.form['Email_Form']
         Fecha_Reserva = request.form['Date_Form']
@@ -140,9 +145,11 @@ def reservation():
         cursor = db.cursor()
         query = "SELECT * FROM Registro WHERE Email_Cliente = %s AND Nombre_Cliente = %s;"
         cursor.execute(query, (Email_User, Nombre_User))
-        user = cursor.fetchone();
+        user = cursor.fetchone()
         
-        ID_User = user[0]
+        print(Email_User, " ", Nombre_User)
+        
+        print(user)
         
         if user is None:
             
@@ -151,6 +158,7 @@ def reservation():
         else:
             
             print("Si entra al else.  :D .")
+            ID_User = user[0]
             
             cursor = db.cursor()
             query = "INSERT INTO Reservas (Cantidad_De_Sillas, Hora_Reserva, Fecha_Reserva, Cliente_ID_F) VALUES (%s, %s, %s, %s)"
@@ -158,21 +166,11 @@ def reservation():
             cursor.execute(query, values)
             db.commit()
 
-
-            return render_template ('success.html')
+            flash('Reserva creada exitosamente!', 'success')
+            return redirect(url_for('success'))
         
-
-        cursor = db.cursor()
-        query = "INSERT INTO Reservas(ID_Reserva, Cantidad_De_Sillas, Fecha_Reserva, Hora_Reserva) VALUES (%s, %s, %s, %s)"
-        values = (cod_mesa, num_sillas, fecha_reserva, horario_reserva)
-        cursor.execute(query, values)
-        db.commit()
-
         flash("Procesando reserva...")
         
-        flash('Reserva creada exitosamente!', 'success')
-        return redirect(url_for('success'))
-    
     return render_template('reservation.html')
 
 @app.route('/success')
