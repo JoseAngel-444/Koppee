@@ -86,23 +86,18 @@ def login():
     if request.method == 'POST':
         email = request.form['email']
         password = request.form['pswd']
-        # rol = request.form['role'] 
+        role = request.form['role'] 
 
         cursor = db.cursor()
-        query = "SELECT * FROM Registro WHERE Email_Cliente = %s"
-        cursor.execute(query, (email,))
+        query = "SELECT * FROM Registro WHERE Email_Cliente = %s AND Rol_Usuario = %s"
+        cursor.execute(query, (email, role))
         user = cursor.fetchone()
-
-        print(email, "/ ", password)
         
 
-        if user:
-            stored_hash = user[3]
+        stored_hash = user[3]
 
-            validacion = check_password_hash(stored_hash, password)
-            print("Aca esta la validacion: ", validacion)
-
-
+        validacion = check_password_hash(stored_hash, password)
+        print("Aca esta la validacion: ", validacion)
 
         if validacion:
             session['user_id'] = user[0]
@@ -135,35 +130,48 @@ logging.basicConfig(level=logging.DEBUG)
 
 @app.route('/reservation', methods= ['GET', 'POST'])
 def reservation():
+    
+    print("En la página web.")
+    
     if request.method == 'POST':
-        cod_mesa = request.form['cod_mesa']
-        num_sillas = request.form['num_sillas']
-        fecha_reserva = request.form['fecha_reserva']
-        horario_reserva = request.form['horario_reserva']
-
-        if not cod_mesa.isdigit() or not num_sillas.isdigit():
-            flash('Por favor, ingresa numeros validos para el codigo de mesa y el numero de sillas.', 'danger')
-            return render_template ('reservation.html')
         
-        if 'user_id' not in session:
-            flash('Debes iniciar sesion primero.', 'danger')
-            return redirect(url_for('login'))
-        
-        usuario_id = session['user_id']        
+        print("Si entra :)")
+        Nombre_User = request.form['Name_Form']
+        Email_User = request.form['Email_Form']
+        Fecha_Reserva = request.form['Date_Form']
+        Hora_Reserva = request.form['Hora_Form']
+        Num_Personas_Reserva = request.form['Num_Personas']
 
         cursor = db.cursor()
-        query = "INSERT INTO Reservas(ID_Reserva, Cantidad_De_Sillas, Fecha_Reserva, Hora_Reserva) VALUES (%s, %s, %s, %s)"
-        values = (num_sillas, fecha_reserva, horario_reserva, usuario_id)
-        cursor.execute(query, values)
-        db.commit()
+        query = "SELECT * FROM Registro WHERE Email_Cliente = %s AND Nombre_Cliente = %s;"
+        cursor.execute(query, (Email_User, Nombre_User))
+        user = cursor.fetchone()
+        
+        print(Email_User, " ", Nombre_User)
+        
+        print(user)
+        
+        if user is None:
+            
+            print("Usuario No encontrado, verifique que el correo y contraseña sean validos. ")
+            
+        else:
+            
+            print("Si entra al else.  :D .")
+            ID_User = user[0]
+            
+            cursor = db.cursor()
+            query = "INSERT INTO Reservas (Cantidad_De_Sillas, Hora_Reserva, Fecha_Reserva, Cliente_ID_F) VALUES (%s, %s, %s, %s)"
+            values = (Num_Personas_Reserva, Hora_Reserva, Fecha_Reserva, ID_User)
+            cursor.execute(query, values)
+            db.commit()
 
+            flash('Reserva creada exitosamente!', 'success')
+            return redirect(url_for('success'))
+        
         flash("Procesando reserva...")
         
-        flash('Reserva creada exitosamente!', 'success')
-        return redirect(url_for('success'))
-    else:
-        flash('Por favor, completa todos los campos.', 'danger')
-        return render_template('reservation.html')
+    return render_template('reservation.html')
 
 @app.route('/success')
 def success():
