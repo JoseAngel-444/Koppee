@@ -59,7 +59,7 @@ def login_required(f):
 def register():
 
         if request.method == 'POST':
-            print(request.form)
+
             username = request.form ['txt']
             email = request.form['Email']
             password = request.form['pswd']
@@ -67,19 +67,30 @@ def register():
 
             if not username or not email or not password:
                 flash('Por favor, completa todos los campos.', 'danger')
-                return render_template('register.html')
+                return render_template('login.html')
             
-            hashed_password = generate_password_hash(password, method='pbkdf2:sha256')
-
             cursor = db.cursor()
-            query = "INSERT INTO Registro (Nombre_Cliente, Email_Cliente, Contraseña_Usuario) VALUES (%s, %s, %s)"
-            values = (username, email, hashed_password)
-            cursor.execute(query, values)
-            db.commit()
+            query = "SELECT * FROM Registro WHERE Email_Cliente = %s AND Rol_Usuario = 'cliente' AND Nombre_Cliente = %s"
+            cursor.execute(query, (email, username))
+            user = cursor.fetchone()
+            
+            if user is None:
+                hashed_password = generate_password_hash(password, method='pbkdf2:sha256')
 
-            flash('Usuario registrado correctamente!', 'success')
-            return redirect(url_for('login'))
-        return render_template('register.html')
+                cursor = db.cursor()
+                query = "INSERT INTO Registro (Nombre_Cliente, Email_Cliente, Contraseña_Usuario) VALUES (%s, %s, %s)"
+                values = (username, email, hashed_password)
+                cursor.execute(query, values)
+                db.commit()
+
+                flash('Usuario registrado correctamente!', 'success')
+                return redirect(url_for('login'))
+            
+            else:
+                
+                print("El usuario ya esta registrado en el sistema. ")
+            
+        return render_template('login.html')
 
 @app.route('/login', methods=['GET', 'POST'])
 def login():
@@ -95,14 +106,24 @@ def login():
         
 
         stored_hash = user[3]
-
         validacion = check_password_hash(stored_hash, password)
         print("Aca esta la validacion: ", validacion)
 
         if validacion:
-            session['user_id'] = user[0]
-            flash('Inicio de sesion exitoso!', 'success')
-            return redirect(url_for('index'))
+        
+            session['ID_Registro'] = user[0]
+            session['User'] = user[1]
+            session['Type_User'] = user[4]
+            
+            if user[4] == 'Administrador':
+                
+                flash('Inicio de sesion exitoso!', 'success')
+                return redirect(url_for('Admin_View'));
+            
+            else:
+                flash('Inicio de sesion exitoso!', 'success')
+                return redirect(url_for('index'))
+        
         else:
             print("Error en la validacion de la contraseña")
             flash('Correo electronico, contraseña o rol incorrectos.', 'danger')
@@ -169,8 +190,6 @@ def reservation():
             flash('Reserva creada exitosamente!', 'success')
             return redirect(url_for('success'))
         
-        flash("Procesando reserva...")
-        
     return render_template('reservation.html')
 
 @app.route('/success')
@@ -196,5 +215,14 @@ def servicio():
 def saber_mas():
     return render_template('sabermas1.html')
 
+@app.route('/admin_view')
+def Admin_View():
+    
+    cursor = db.cursor()
+    query = "SELECT * FROM Registro "
+    cursor.execute(query, )
+    Listado_Users = cursor.fetchall()
+    
+    return render_template('Admin_Page_View', Listado_Usuarios = Listado_Users)
 
 app.run(debug=True, port=5005)
