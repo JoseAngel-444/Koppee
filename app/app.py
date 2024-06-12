@@ -169,8 +169,6 @@ def reservation():
             flash('Reserva creada exitosamente!', 'success')
             return redirect(url_for('success'))
         
-        flash("Procesando reserva...")
-        
     return render_template('reservation.html')
 
 @app.route('/success')
