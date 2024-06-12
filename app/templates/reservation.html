@@ -53,7 +53,7 @@
                         </div>
                     </div>
                     <a href="{{ url_for('contact') }}" class="nav-item nav-link">Contactos</a>
-                    
+                    <a href="{{ url_for('logout') }}" class="nav-item} nav-link btn btn-outline-primary">Cerrar Sesión</a>
                 </div>
             </div>
         </nav>
@@ -105,21 +105,21 @@
                                         required="required" />
                                 </div>
                                 <div class="form-group">
-                                    <input name="Email_Form" type="email" class="form-control-reservation form-control bg-transparent border-primary p-4 text-white" placeholder="Correo electronico"
+                                    <input name="Email_Form" type="email" class="form-control bg-transparent border-primary p-4 text-white" placeholder="Correo electronico"
                                         required="required" />
                                 </div>
                                 <div class="form-group">
-                                    <div class="date" id="date" data-target-input="nearest">
+                                    <div class="date" id="date">
                                         <input name="Date_Form" type="date" class="form-control bg-transparent border-primary p-4 datetimepicker-input text-white" placeholder="Fecha" data-target="#date" data-toggle="datetimepicker"/>
                                     </div>
                                 </div>
                                 <div class="form-group">
-                                    <div class="time" id="time" data-target-input="nearest">
-                                        <input name="Hora_Form" type="time" class="form-control bg-transparent border-primary p-4 datetimepicker-input text-white" placeholder="Hora" data-target="#time" data-toggle="datetimepicker"/>
+                                    <div class="time" id="time" >
+                                        <input name="Hora_Form" type="time" class="form-control bg-transparent border-primary p-4 datetimepicker-input text-white" placeholder="Hora" />
                                     </div>
                                 </div>
                                 <div class="form-group form-group-reservation">
-                                    <select name="Num_Personas" class="custom-select bg-transparent border-primary px-4 text-white" style="height: 49px;">
+                                    <select name="Num_Personas" class="custom-select bg-transparent border-primary px-4 " style="height: 49px;">
                                         <option selected value="2">2 Personas</option>
                                         <option value="3">3 Personas</option>
                                         <option value="3">4 Personas</option>

@@ -195,6 +195,13 @@ def saber_mas():
     return render_template('sabermas1.html')
 
 
+@app.route('/logout', methods= ['GET', 'POST'])
+def logout():
+    # Aquí va el código para cerrar la sesión del usuario
+    return render_template('logout.html')
+
+
+
 
 
 app.run(debug=True, port=5005)
