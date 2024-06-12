@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <title> Listado de usuarios registrados </title>
+    
+    <link rel="icon" href="/coffee-shop-html-template/img/LogoCFT-Photoroom.png-Photoroom.png" type="image/gif" />
+    <link href="img/favicon.ico" rel="icon">
+
+    
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@200;400&family=Roboto:wght@400;500;700&display=swap" rel="stylesheet"> 
+
+    
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css" rel="stylesheet">
+
+    
+    <link href="{{url_for('static',filename='lib/owlcarousel/assets/owl.carousel_min.css')}}" rel="stylesheet">
+    <link href="{{url_for('static',filename='lib/tempusdominus/css/tempusdominus-bootstrap-4_min.css')}}" rel="stylesheet" />
+
+    <link rel="stylesheet" href="{{url_for('static',filename='/css/style_min.css')}}">
+    
+</head>
+<body>
+    <table>
+        <tr> 
+            <th> Código </th> <th> Nombre </th> <th> Nombre de Usuario </th> <th> Correo </th> <th> Opciones </th>
+        </tr> 
+
+        {% for Listado_Usuarios in Listado_Users %}
+
+            <tr>
+                <td> {{ Listado_Usuarios[0] }} </td> 
+                <td> {{ Listado_Usuarios[1] }} </td> 
+                <td> {{ Listado_Usuarios[2] }} </td>
+                <td> {{ Listado_Usuarios[4] }} </td>
+
+                <td>
+                    <a href=""> <button> Editar </button> </a>
+                    <a href=""> <button> Eliminar </button> </a>
+                </td>
+    
+            </tr>
+
+        {% endfor %}
+        
+        
+
+    </table>
+</body>
+</html>

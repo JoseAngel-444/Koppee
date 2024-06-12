@@ -13,6 +13,13 @@ CREATE TABLE IF NOT EXISTS `Koppe2`.`Registro` (
   PRIMARY KEY (`ID_Registro`))
 ENGINE = InnoDB;
 
+/* En esta parte arpovecho y le digo a SQl que el rol usuario por default va a 
+ser 'cliente' y así aunque el usuario no eliga el rol tendra uno por defecto 
+que es el de usuario. PDT: El problema es para cuando se quiera registrar a 
+otro usuario como administrador. */
+
+ALTER TABLE `koppe2`.`registro` 
+CHANGE COLUMN `Rol_Usuario` `Rol_Usuario` VARCHAR(45) NOT NULL DEFAULT 'cliente' ;
 
 -- -----------------------------------------------------
 -- Table `Koppe2`.`Reservas`
@@ -26,4 +33,16 @@ CREATE TABLE IF NOT EXISTS `Koppe2`.`Reservas` (
   PRIMARY KEY (`ID_Reserva`))
 ENGINE = InnoDB;
 
+/* Acá se crea la llave foranea de la tabla de reservas, la cual conecta
+Cliente_ID_F (Cliente_ID_Foraneo) y ID_Registro (Que es el ID del usuario en
+la tabla original) */
 
+ALTER TABLE `koppe2`.`reservas` 
+ADD INDEX `ID_Persona_Reserva_idx` (`Cliente_ID_F` ASC);
+;
+ALTER TABLE `koppe2`.`reservas` 
+ADD CONSTRAINT `ID_Persona_Reserva`
+  FOREIGN KEY (`Cliente_ID_F`)
+  REFERENCES `koppe2`.`registro` (`ID_Registro`)
+  ON DELETE CASCADE
+  ON UPDATE CASCADE;

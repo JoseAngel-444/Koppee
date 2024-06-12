@@ -53,7 +53,7 @@
                         </div>
                     </div>
                     <a href="{{ url_for('contact') }}" class="nav-item nav-link">Contactos</a>
-                    
+                    <a href="{{ url_for('logout') }}" class="nav-item} nav-link btn btn-outline-primary">Cerrar Sesión</a>
                 </div>
             </div>
         </nav>
@@ -95,33 +95,32 @@
                     <div class="col-lg-6">
                         <div class="text-center p-5" style="background: rgba(51, 33, 29, .8);">
                             <h1 class="text-white mb-4 mt-5">Reserva tu mesa</h1>
-                            <form class="mb-5">
+                            <form action="/reservation" method="post" class="mb-5">
                                 <div class="form-group">
-                                    <input type="text" class="form-control bg-transparent border-primary p-4" placeholder="Nombre"
+                                    <input name="Name_Form" type="text" class="form-control bg-transparent border-primary p-4 text-white" placeholder="Nombre"
                                         required="required" />
                                 </div>
                                 <div class="form-group">
-                                    <input type="email" class="form-control bg-transparent border-primary p-4" placeholder="Correo electrónico"
+                                    <input name="Email_Form" type="email" class="form-control bg-transparent border-primary p-4 text-white" placeholder="Correo electronico"
                                         required="required" />
                                 </div>
                                 <div class="form-group">
-                                    <div
-                                    class="date" id="date" data-target-input="nearest">
-                                        <input type="date" class="form-control bg-transparent border-primary p-4 datetimepicker-input" placeholder="Fecha" data-target="#date" data-toggle="datetimepicker"/>
+                                    <div class="date" id="date">
+                                        <input name="Date_Form" type="date" class="form-control bg-transparent border-primary p-4 datetimepicker-input text-white" placeholder="Fecha" data-target="#date" data-toggle="datetimepicker"/>
                                     </div>
                                 </div>
                                 <div class="form-group">
-                                    <div class="time" id="time" data-target-input="nearest">
-                                        <input type="time" class="form-control bg-transparent border-primary p-4 datetimepicker-input" placeholder="Hora" data-target="#time" data-toggle="datetimepicker"/>
+                                    <div class="time" id="time" >
+                                        <input name="Hora_Form" type="time" class="form-control bg-transparent border-primary p-4 datetimepicker-input text-white" placeholder="Hora" />
                                     </div>
                                 </div>
-                                <div class="form-group">
-                                    <select class="custom-select bg-transparent border-primary px-4" style="height: 49px;">
-                                        <option selected>Personas</option>
-                                        <option value="1">Persona 1</option>
-                                        <option value="2">Persona 2</option>
-                                        <option value="3">Persona 3</option>
-                                        <option value="3">Persona 4</option>
+                                <div class="form-group form-group-reservation">
+                                    <select name="Num_Personas" class="custom-select bg-transparent border-primary px-4 " style="height: 49px;">
+                                        <option selected value="2">2 Personas</option>
+                                        <option value="3">3 Personas</option>
+                                        <option value="3">4 Personas</option>
+                                        <option value="3">5 Personas</option>
+                                        <option value="3">6 Personas</option>
                                     </select>
                                 </div>
                                 
