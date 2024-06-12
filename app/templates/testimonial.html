@@ -3,7 +3,7 @@
 
 <head>
     <meta charset="utf-8">
-    <title>KOPPEE - Sitio web para tu cafeteria</title>
+    <title>KOFFIN - Sitio web para tu cafeteria</title>
     <meta content="width=device-width, initial-scale=1.0" name="viewport">
     <meta content="Free Website Template" name="keywords">
     <meta content="Free Website Template" name="description">
@@ -33,7 +33,7 @@
     <div class="container-fluid p-0 nav-bar">
         <nav class="navbar navbar-expand-lg bg-none navbar-dark py-3">
             <a href="{{ url_for('index') }}" class="navbar-brand px-lg-4 m-0">
-                <h1 class="m-0 display-4 text-uppercase text-white">KOPPEE</h1>
+                <h1 class="m-0 display-4 text-uppercase text-white">KOFFIN</h1>
             </a>
             <button type="button" class="navbar-toggler" data-toggle="collapse" data-target="#navbarCollapse">
                 <span class="navbar-toggler-icon"></span>
@@ -80,10 +80,10 @@
                 <h4 class="text-primary text-uppercase" style="letter-spacing: 5px;">Referencias</h4>
                 <h1 class="display-4">Nuestros clientes opinan</h1>
             </div>
-            <div class="owl-carousel testimonial-carousel">
+            <div class="col-lg-4 mb-5">
                 <div class="testimonial-item">
                     <div class="d-flex align-items-center mb-3">
-                        <img class="img-fluid" src="{{url_for('static',filename='/img/testimonial-1.jpg')}}" alt="">
+                        <img class="img-fluid rounded-circle mb-3 mb-sm-0" src="{{url_for('static',filename='/img/testimonial-1.jpg')}}" alt="">
                         <div class="ml-3">
                             <h4>Maria Alejandra Lopez</h4>
                             <i>Estudiante</i>
@@ -91,9 +91,11 @@
                     </div>
                     <p class="m-0">Me gusta mucho disfrutar de un rico cafe mientras estudio para mis examenes, y en KOPPEE encontre eso que tanto buscaba.</p>
                 </div>
+            </div>
+            <div class="col-lg-4 mb-5">
                 <div class="testimonial-item">
                     <div class="d-flex align-items-center mb-3">
-                        <img class="img-fluid" src="{{url_for('static',filename='/img/testimonial-2.jpg')}}" alt="">
+                        <img class="img-fluid rounded-circle mb-3 mb-sm-0" src="{{url_for('static',filename='/img/testimonial-2.jpg')}}" alt="">
                         <div class="ml-3">
                             <h4>Jose Angel Arrieta</h4>
                             <i>Estudiante</i>
@@ -101,9 +103,11 @@
                     </div>
                     <p class="m-0">No te pasa que buscas un lugar para compartir con tus amigos y familiares y ninguno te convence, bueno, en KOPPEE todo eso cambio, en este lugar encontre lo que buscaba y me lleve una de las mejores experiencias..</p>
                 </div>
+            </div>
+            <div class="col-lg-4 mb-5">
                 <div class="testimonial-item">
                     <div class="d-flex align-items-center mb-3">
-                        <img class="img-fluid" src="{{url_for('static',filename='/img/testimonial-3.jpg')}}" alt="">
+                        <img class="img-fluid rounded-circle mb-3 mb-sm-0" src="{{url_for('static',filename='/img/testimonial-3.jpg')}}" alt="">
                         <div class="ml-3">
                             <h4>Fernanda Lopez</h4>
                             <i>Maestra</i>
@@ -111,9 +115,11 @@
                     </div>
                     <p class="m-0">KOPPEE me inspira, me relaja, me hace sentir tranquilidad despues de arduo trabajo.</p>
                 </div>
+            </div>
+            <div class="col-lg-4 mb-5">
                 <div class="testimonial-item">
                     <div class="d-flex align-items-center mb-3">
-                        <img class="img-fluid" src="{{url_for('static',filename='/img/testimonial-4.jpg')}}" alt="">
+                        <img class="img-fluid rounded-circle mb-3 mb-sm-0" src="{{url_for('static',filename='/img/testimonial-4.jpg')}}" alt="">
                         <div class="ml-3">
                             <h4>Roberto Rojas Guzman</h4>
                             <i>Ingeniero</i>
@@ -124,6 +130,7 @@
             </div>
         </div>
     </div>
+</div>
 
 
 
@@ -154,19 +161,24 @@
                     <p>2.00 PM - 8.00 PM</p>
                 </div>
             </div>
+            
+
+
             <div class="col-lg-3 col-md-6 mb-5">
-                <h4 class="text-white text-uppercase mb-4" style="letter-spacing: 3px;">Boletin</h4>
-                <p>Tu experiencia es importante para nosotros.</p>
+                <h4 class="text-white text-uppercase mb-4" style="letter-spacing: 3px;">KOFFIN</h4>
+                
+                <img class="img-fluid rounded-circle mb-3 mb-sm-0" src="{{url_for('static',filename='/img/LOGO.jpg')}}" alt="Disfruta de nuestra imagen representativa" style="width: 200px; height:auto" class="img-fluid mb-3">
                 <div class="w-100">
                     <div class="input-group">
-                        <input type="text" class="form-control border-light" style="padding: 25px;" placeholder="Su correo">
-                        <div class="input-group-append">
-                            <button class="btn btn-primary font-weight-bold px-3">Únete</button>
+                            
                         </div>
                     </div>
                 </div>
             </div>
-        </div>
+
+
+
+
         <div class="container-fluid text-center text-white border-top mt-4 py-4 px-sm-3 px-md-5" style="border-color: rgba(256, 256, 256, .1) !important;">
             <p class="mb-2 text-white">Derechos de autor &copy; <a class="font-weight-bold" href="#">Dominio</a>. Todos los derechos reservados.</a></p>
             <p class="m-0 text-white">Diseñado Por <a class="font-weight-bold" href="https://htmlcodex.com">@Jose Angel (Junior programmer)</a></p>
@@ -181,19 +193,19 @@
     <!-- JavaScript Libraries -->
     <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.bundle.min.js"></script>
-    <script src="/app/static/lib/easing/easing.min.js"></script>
-    <script src="/app/static/lib/waypoints/waypoints.min.js"></script>
-    <script src="/app/static/lib/owlcarousel/owl.carousel.min.js"></script>
-    <script src="/app/static/lib/tempusdominus/js/moment.min.js"></script>
-    <script src="/app/static/js/moment-timezone.min.js"></script>
-    <script src="/app/static/lib/tempusdominus/js/tempusdominus-bootstrap-4.min.js"></script>
+    <script src="{{url_for('static',filename='/lib/easing/easing.min.js')}}"></script>
+    <script src="{{url_for('static',filename='/lib/waypoints/waypoints.min.js')}}"></script>
+    <script src="{{url_for('static',filename='/lib/owlcarousel/owl.carousel.min.js')}}"></script>
+    <script src="{{url_for('static',filename='/lib/tempusdominus/js/moment.min.js')}}"></script>
+    <script src="{{url_for('static',filename='/lib/tempusdominus/js/moment-timezone.min.js')}}"></script>
+    <script src="{{url_for('static',filename='/lib/tempusdominus/js/tempusdominus-bootstrap-4.min.js')}}"></script>
 
     <!-- Contact Javascript File -->
-    <script src="/app/static/mail/jqBootstrapValidation.min.js"></script>
-    <script src="/app/static/mail/contact.js"></script>
+    <script src="{{url_for('static',filename='/mail/jqBootstrapValidation.min.js')}}"></script>
+    <script src="{{url_for('static',filename='/mail/contact.js')}}"></script>
 
     <!-- Template Javascript -->
-    <script src="/app/static/js/main.js"></script>
+    <script src="{{url_for('static',filename='/js/main.js')}}"></script>
 </body>
 
 </html>

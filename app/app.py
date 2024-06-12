@@ -192,6 +192,9 @@ def servicio():
     return render_template('service.html')
 
 
+@app.route('/sabermas1')
+def saber_mas():
+    return render_template('sabermas1.html')
 
 
 app.run(debug=True, port=5005)
