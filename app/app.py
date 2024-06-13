@@ -1,4 +1,4 @@
-from flask import Flask, render_template, redirect, request, url_for, flash, session
+from flask import Flask, render_template, redirect, request, url_for, flash, session, jsonify
 from flask_login import LoginManager
 from functools import wraps
 import mysql.connector
@@ -75,6 +75,9 @@ def register():
             user = cursor.fetchone()
             
             if user is None:
+                
+                type_Flash = "alert-success"
+                
                 hashed_password = generate_password_hash(password, method='pbkdf2:sha256')
 
                 cursor = db.cursor()
@@ -82,15 +85,36 @@ def register():
                 values = (username, email, hashed_password)
                 cursor.execute(query, values)
                 db.commit()
-
-                flash('Usuario registrado correctamente!', 'success')
-                return redirect(url_for('login'))
+                
+                
+                flash('Usuario registrado correctamente!')
+                print(type_Flash)
             
             else:
                 
-                print("El usuario ya esta registrado en el sistema. ")
-            
-        return render_template('login.html')
+                cursor = db.cursor()
+                query = "SELECT Email_Cliente, Nombre_Cliente FROM Registro WHERE Email_Cliente = %s AND Rol_Usuario = 'cliente' AND Nombre_Cliente = %s"
+                cursor.execute(query, (email, username))
+                user = cursor.fetchone()
+                
+                type_Flash = "alert-danger"
+                
+                if (user[0] == email):
+                    
+                    print("Solo email. ")
+                    flash("Email ya registrado. ")
+                    
+                    
+                elif (user[1] == username):
+                        
+                    print("Solo nombre.")
+                    flash("Nombre de usuario registrado. ")
+                
+                else:
+                    print("El usuario ya esta registrado en el sistema. ")
+                    flash("Nombre de usuario e email ya registrados")
+                    
+        return render_template('login.html', type_Flash=type_Flash) 
 
 @app.route('/login', methods=['GET', 'POST'])
 def login():
@@ -126,7 +150,7 @@ def login():
         
         else:
             print("Error en la validacion de la contraseña")
-            flash('Correo electronico, contraseña o rol incorrectos.', 'danger')
+            
     else:
         print("Usuario no encontrado")
 
