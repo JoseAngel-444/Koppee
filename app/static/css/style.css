@@ -1914,7 +1914,11 @@ pre code {
 }
 
 .form-control::placeholder {
+<<<<<<< HEAD
   color: #ffffff;
+=======
+  color: #6c757d;
+>>>>>>> c08ef7d5a44cefdfa0b0a2b8e78348290b434556
   opacity: 1;
 }
 
@@ -9651,4 +9655,12 @@ h6,
   background-position: top;
   background-repeat: no-repeat;
   background-size: cover;
+<<<<<<< HEAD
 }
+=======
+}
+<<<<<<< HEAD
+
+=======
+>>>>>>> master
+>>>>>>> c08ef7d5a44cefdfa0b0a2b8e78348290b434556
