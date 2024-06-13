@@ -190,9 +190,9 @@ def servicio():
     return render_template('service.html')
 
 
-@app.route('/sabermas1')
+@app.route('/historia', methods= ['GET', 'POST'])
 def saber_mas():
-    return render_template('sabermas1.html')
+    return render_template('historia.html')
 
 
 @app.route('/logout', methods= ['GET', 'POST'])
