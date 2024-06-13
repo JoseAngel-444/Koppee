@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Reserva Exitosa</title>
+    
+    <link rel="stylesheet" href="{{url_for('static',filename='/css/style_min.css')}}">
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+</head>
+<body>
+    <div class="container">
+        <h1><i class="fas fa-check-circle"></i> ¡Reserva Realizada Exitosamente!</h1>
+        <p>Tu reserva ha sido registrada con éxito. Gracias por utilizar nuestros servicios.</p>
+        <a href="{{ url_for('index') }}" class="btn btn-primary">Volver al Inicio</a>
+    </div>
+</body>
+</html>

@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width, initial-scale=1.0">
+    <title>Iniciar sesión y registrarse</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='/img/LogoCFT-Photoroom') }}" type="image/gif" />
+    <link rel="stylesheet" href="{{url_for('static',filename='/css/login.css')}}">
+    <link rel="stylesheet" href="{{url_for('static',filename='/css/login.css')}}">
+
+</head>
+<body>
+    
+<div class="main">
+    <input type="checkbox" id="chk" aria-hidden="true">
+    <div class="signup">
+        <form action="{{ url_for('register') }} " method="post">
+
+
+            <label for="chk" aria-hidden="true">Registrarse</label>
+            <input type="text" name="txt" placeholder="Nombre de usuario" required="">
+            <input type="email" name="Email" placeholder="Correo electronico" required="">
+            <input type="password" name="pswd" placeholder="Clave" required="">
+            <button type="submit">Registrarse</button>
+        </form>
+
+
+
+    </div>
+
+    <div class="login">
+        <form action="{{ url_for('login') }}" method="post">
+            <label for="chk" aria-hidden="true">Ingresar</label>
+            <input type="email" name="email" placeholder="Correo electronico" required="">
+            <input type="password" name="pswd" placeholder="Clave" required="">
+            <select name="role" required="">
+                <option value="cliente">Cliente</option>
+                <option value="administrador">Administrador</option>
+            </select>
+            <button type="submit">Ingresar</button>
+            <label class="forgot-password">¿Olvidaste tu contraseña?</label>
+        </form>
+    </div>
+</div>
+
+
+</body>
+</html>
