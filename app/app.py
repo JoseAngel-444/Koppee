@@ -88,7 +88,6 @@ def register():
                 
                 
                 flash('Usuario registrado correctamente!')
-                print(type_Flash)
             
             else:
                 
@@ -128,33 +127,42 @@ def login():
         cursor.execute(query, (email, role))
         user = cursor.fetchone()
         
+        if user is not None:
 
-        stored_hash = user[3]
-        validacion = check_password_hash(stored_hash, password)
-        print("Aca esta la validacion: ", validacion)
+            stored_hash = user[3]
+            validacion = check_password_hash(stored_hash, password)
+            print("Aca esta la validacion: ", validacion)
 
-        if validacion:
-        
-            session['ID_Registro'] = user[0]
-            session['User'] = user[1]
-            session['Type_User'] = user[4]
+            if validacion:
             
-            if user[4] == 'Administrador':
+                session['ID_Registro'] = user[0]
+                session['User'] = user[1]
+                session['Type_User'] = user[4]
                 
-                flash('Inicio de sesion exitoso!', 'success')
-                return redirect(url_for('Admin_View'));
+                if user[4] == 'Administrador':
+                    
+                    type_Flash = "alert-success"
+                    flash('Inicio de sesion exitoso!')
+                    return redirect(url_for('Admin_View'));
+                
+                else:
+                    type_Flash = "alert-success"
+                    flash('Inicio de sesion exitoso!')
+                    return redirect(url_for('index'))
             
             else:
-                flash('Inicio de sesion exitoso!', 'success')
-                return redirect(url_for('index'))
-        
+                type_Flash = "alert-danger"
+                print("Error en la validacion de la contraseña")
+                flash("Contraseña incorrecta. ")
+                
         else:
-            print("Error en la validacion de la contraseña")
             
-    else:
-        print("Usuario no encontrado")
+            type_Flash = "alert-danger"
+            flash("Usuario no registrado.")
+            print("Usuario no registrado. ")
 
-    return render_template('login.html')
+
+    return render_template('login.html', type_Flash=type_Flash)
 
 @app.route('/index', methods = ['GET', 'POST']) 
 def index():
@@ -193,10 +201,12 @@ def reservation():
         user = cursor.fetchone()
         
         print(Email_User, " ", Nombre_User)
-        
         print(user)
         
         if user is None:
+            
+            type_Flash = "alert-danger"            
+            flash("Email y Usuario no encontrados. ")
             
             print("Usuario No encontrado, verifique que el correo y contraseña sean validos. ")
             
@@ -210,8 +220,9 @@ def reservation():
             values = (Num_Personas_Reserva, Hora_Reserva, Fecha_Reserva, ID_User)
             cursor.execute(query, values)
             db.commit()
-
-            flash('Reserva creada exitosamente!', 'success')
+            
+            type_Flash = "alert-success"
+            flash('Reserva creada exitosamente!')
             return redirect(url_for('success'))
         
     return render_template('reservation.html')
