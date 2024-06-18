@@ -178,9 +178,6 @@ def about():
 def menu():
     return render_template('menu.html')
 
-
-logging.basicConfig(level=logging.DEBUG)
-
 @app.route('/reservation', methods= ['GET', 'POST'])
 def reservation():
     
@@ -216,16 +213,31 @@ def reservation():
             ID_User = user[0]
             
             cursor = db.cursor()
-            query = "INSERT INTO Reservas (Cantidad_De_Sillas, Hora_Reserva, Fecha_Reserva, Cliente_ID_F) VALUES (%s, %s, %s, %s)"
-            values = (Num_Personas_Reserva, Hora_Reserva, Fecha_Reserva, ID_User)
-            cursor.execute(query, values)
-            db.commit()
+            query = "SELECT * FROM Reservas Where Cliente_ID_F = %s"
+            cursor.execute(query, (ID_User,))
+            user_reservation = cursor.fetchall()
             
-            type_Flash = "alert-success"
-            flash('Reserva creada exitosamente!')
-            return redirect(url_for('success'))
+            if user_reservation is None:
+            
+                cursor = db.cursor()
+                query = "INSERT INTO Reservas (Cantidad_De_Sillas, Hora_Reserva, Fecha_Reserva, Cliente_ID_F) VALUES (%s, %s, %s, %s)"
+                values = (Num_Personas_Reserva, Hora_Reserva, Fecha_Reserva, ID_User)
+                cursor.execute(query, values)
+                db.commit()
+                
+                type_Flash = "alert-success"
+                flash('Reserva creada exitosamente!')
+                
+            else:
+                
+                type_Flash = "alert-danger"
+                flash("El usuario ya realizo una reserva. ")
+            
+    else:
         
-    return render_template('reservation.html')
+        type_Flash = "alert"
+        
+    return render_template('reservation.html', type_Flash=type_Flash)
 
 @app.route('/success')
 def success():

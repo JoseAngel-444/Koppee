@@ -9,23 +9,18 @@
     <meta content="Free Website Template" name="description">
 
     
-    <link href="img/favicon.ico" rel="icon">
-
-    
     <link rel="preconnect" href="https://fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@200;400&family=Roboto:wght@400;500;700&display=swap" rel="stylesheet"> 
 
     
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css" rel="stylesheet">
 
-   
     <link href="{{url_for('static',filename='lib/owlcarousel/assets/owl.carousel_min.css')}}" rel="stylesheet">
     <link href="{{url_for('static',filename='lib/tempusdominus/css/tempusdominus-bootstrap-4_min.css')}}" rel="stylesheet" />
 
     
     <link rel="stylesheet" href="{{url_for('static',filename='/css/style_min.css')}}">
 
-    <link rel="icon" href="{{url_for('static',filename='/img/LogoCFT-Photoroom.jpg')}}" type="image/gif" />
 </head>
 
 <body>
@@ -76,30 +71,26 @@
 
     <div class="container-fluid py-5">
         <div class="container">
-            <div class="reservation position-relative 
-            
-            
-            
-            lay-top overlay-bottom">
+            <div class="reservation position-relative lay-top overlay-bottom">
                 <div class="row align-items-center">
-                    <div class="col-lg-6 my-5 my-lg-0">
-                        <div class="p-5">
-                            <div class="mb-4">
-                                <h1 class="display-3 text-primary">30% de descuento</h1>
-                                <h1 class="text-white">Para reservas en línea</h1>
-                            </div>
-                            <p class="text-white">Aprovecha nuestra oferta, ¡Reserva ya tu mesa en nuestra cafeteria para que disfrutes de nuestras preparaciones y tengas la mejor experiencia!...</p>
-                            <ul class="list-inline text-white m-0">
-                                <li class="py-2"><i class="fa fa-check text-primary mr-3"></i>Excelente atencion</li>
-                                <li class="py-2"><i class="fa fa-check text-primary mr-3"></i>Calidad y sabor en cada uno de tus pedidos</li>
-                                <li class="py-2"><i class="fa fa-check text-primary mr-3"></i>Experiencias inolvidables</li>
-                            </ul>
-                        </div>
-                    </div>
+                    
                     <div class="col-lg-6">
+                        
                         <div class="text-center p-5" style="background: rgba(51, 33, 29, .8);">
                             <h1 class="text-white mb-4 mt-5">Reserva tu mesa</h1>
-                            <form action="/reservation" method="post" class="mb-5">
+
+
+                            <form action="{{ url_for('reservation') }}" method="POST">
+
+                                {% for message in get_flashed_messages() %}
+
+                                <div class="alert {{ type_Flash }}">
+                                    <span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span>
+                                    {{ message }}
+                                </div> 
+                        
+                                {% endfor %}
+
                                 <div class="form-group">
                                     <input name="Name_Form" type="text" class="form-control bg-transparent border-primary p-4 text-white" placeholder="Nombre" style="background: rgba(139, 69, 19,.8); color: white;" required="required">
                                 </div>
@@ -107,13 +98,13 @@
                                     <input name="Email_Form" type="email" class="form-control bg-transparent border-primary p-4 text-white" placeholder="Correo electronico" style="background: rgba(139, 69, 19,.8); color: white;" required="required">
                                 </div>
                                 <div class="form-group">
-                                    <div class="date" id="date" data-target-input="nearest">
-                                        <input name="Date_Form" type="date" class="form-control bg-transparent border-primary p-4 text-white" placeholder="Fecha" data-target="#date" data-toggle="datetimepicker" style="background: rgba(139, 69, 19,.8); color: white;" required/>
+                                    <div class="date" id="date">
+                                        <input name="Date_Form" type="date" class="form-control bg-transparent border-primary p-4 text-white" placeholder="Fecha" data-target="#date" style="background: rgba(139, 69, 19,.8); color: white;" required/>
                                     </div>
                                 </div>
                                 <div class="form-group">
-                                    <div class="time" id="time" data-target-input="nearest">
-                                        <input name="Hora_Form" type="time" class="form-control bg-transparent border-primary p-4 text-white" placeholder="Hora" data-target="#time" data-toggle="datetimepicker" style="background: rgba(139, 69, 19,.8); color: white;"  required/>
+                                    <div class="time" id="time">
+                                        <input name="Hora_Form" type="time" class="form-control bg-transparent border-primary p-4 text-white" placeholder="Hora" data-target="#time" style="background: rgba(139, 69, 19,.8); color: white;"  required/>
                                     </div>
                                 </div>
                                 <div class="form-group">
@@ -129,7 +120,24 @@
                                 <div>
                                     <button class="btn btn-primary btn-block font-weight-bold py-3" type="submit">Reservar ahora</button>
                                 </div>
+
                             </form>
+
+                        </div>
+
+                        <div class="col-lg-6 my-5 my-lg-0">
+                            <div class="p-5">
+                                <div class="mb-4">
+                                    <h1 class="display-3 text-primary">30% de descuento</h1>
+                                    <h1 class="text-white">Para reservas en línea</h1>
+                                </div>
+                                <p class="text-white">Aprovecha nuestra oferta, ¡Reserva ya tu mesa en nuestra cafeteria para que disfrutes de nuestras preparaciones y tengas la mejor experiencia!...</p>
+                                <ul class="list-inline text-white m-0">
+                                    <li class="py-2"><i class="fa fa-check text-primary mr-3"></i>Excelente atencion</li>
+                                    <li class="py-2"><i class="fa fa-check text-primary mr-3"></i>Calidad y sabor en cada uno de tus pedidos</li>
+                                    <li class="py-2"><i class="fa fa-check text-primary mr-3"></i>Experiencias inolvidables</li>
+                                </ul>
+                            </div>
                         </div>
                     </div>
                 </div>
