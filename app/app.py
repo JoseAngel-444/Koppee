@@ -66,17 +66,15 @@ def register():
 
 
             if not username or not email or not password:
-                flash('Por favor, completa todos los campos.', 'danger')
-                return render_template('login.html')
+                type_Flash = "alert-danger"
+                flash('Por favor, completa todos los campos.')
             
             cursor = db.cursor()
-            query = "SELECT * FROM Registro WHERE Email_Cliente = %s AND Rol_Usuario = 'cliente' AND Nombre_Cliente = %s"
+            query = "SELECT * FROM Registro WHERE (Email_Cliente = %s OR Nombre_Cliente = %s) AND Rol_Usuario = 'cliente' "
             cursor.execute(query, (email, username))
             user = cursor.fetchone()
             
             if user is None:
-                
-                type_Flash = "alert-success"
                 
                 hashed_password = generate_password_hash(password, method='pbkdf2:sha256')
 
@@ -86,29 +84,27 @@ def register():
                 cursor.execute(query, values)
                 db.commit()
                 
-                
+                type_Flash = "alert-success"
                 flash('Usuario registrado correctamente!')
             
             else:
                 
                 cursor = db.cursor()
-                query = "SELECT Email_Cliente, Nombre_Cliente FROM Registro WHERE Email_Cliente = %s AND Rol_Usuario = 'cliente' AND Nombre_Cliente = %s"
-                cursor.execute(query, (email, username))
-                user = cursor.fetchone()
-                
+                query = "SELECT Email_Cliente FROM Registro WHERE Email_Cliente = %s AND Rol_Usuario = 'cliente' "
+                cursor.execute(query, (email,))
+                Is_Available_Email = cursor.fetchone()
                 type_Flash = "alert-danger"
                 
-                if (user[0] == email):
-                    
-                    print("Solo email. ")
-                    flash("Email ya registrado. ")
-                    
-                    
-                elif (user[1] == username):
-                        
-                    print("Solo nombre.")
-                    flash("Nombre de usuario registrado. ")
+                if Is_Available_Email and Is_Available_Email[0] == email:
                 
+                    print("Email ya tomado. ")
+                    flash("El email ingresado ya esta en uso. ")
+                
+                elif Is_Available_Email and Is_Available_Email[0] != email:
+                
+                    print("Nombre de usuario ya tomado. ")
+                    flash("El nombre de usuario ingresado ya esta en uso. ")
+            
                 else:
                     print("El usuario ya esta registrado en el sistema. ")
                     flash("Nombre de usuario e email ya registrados")
@@ -117,7 +113,10 @@ def register():
 
 @app.route('/login', methods=['GET', 'POST'])
 def login():
+    
+    type_Flash = "alert"
     if request.method == 'POST':
+        
         email = request.form['email']
         password = request.form['pswd']
         role = request.form['role'] 
@@ -139,7 +138,7 @@ def login():
                 session['User'] = user[1]
                 session['Type_User'] = user[4]
                 
-                if user[4] == 'Administrador':
+                if user[4] == 'administrador':
                     
                     type_Flash = "alert-success"
                     flash('Inicio de sesion exitoso!')
@@ -266,10 +265,61 @@ def saber_mas():
 def Admin_View():
     
     cursor = db.cursor()
-    query = "SELECT * FROM Registro "
+    query = "SELECT * FROM Registro Where Rol_Usuario = 'cliente'"
     cursor.execute(query, )
     Listado_Users = cursor.fetchall()
     
-    return render_template('Admin_Page_View', Listado_Usuarios = Listado_Users)
+    return render_template('Admin_Page_View.html', Listado_Usuarios = Listado_Users)
+
+@app.route('/Editar_Usuario/<int:id>', methods = ['GET','POST'])
+def Editar_Usuario(id):
+    cursor = db.cursor()
+    if request.method == 'POST':
+        
+        Username = request.form ['txt']
+        Email = request.form['Email']
+        Password = request.form['pswd']
+    #sentencia para actualizar los datos
+    
+        cursor = db.cursor()
+        query = "SELECT Email_Cliente, Nombre_Cliente FROM Registro WHERE (Email_Cliente = %s OR Nombre_Cliente = %s) AND Rol_Usuario = 'cliente' "
+        cursor.execute(query, (Email, Username))
+        Is_Available = cursor.fetchone()
+                
+        if Is_Available is None:
+        
+            Update_Data = "UPDATE Registro set Nombre_Cliente = %s, Email_Cliente = %s, Contraseña_Usuario = %s Where ID_Persona = %s"
+            cursor.execute(Update_Data,(Username, Email, Password, id))
+            db.commit()
+            
+        else:
+            
+            cursor = db.cursor()
+            query = "SELECT Email_Cliente FROM Registro WHERE Email_Cliente = %s AND Rol_Usuario = 'cliente' "
+            cursor.execute(query, (Email,))
+            Is_Available_Email = cursor.fetchone()
+            
+            if Is_Available_Email and Is_Available_Email[0] == Email:
+            
+                print("Email ya tomado. ")
+                flash("El email ingresado ya esta en uso. ")
+                
+            elif Is_Available_Email and Is_Available_Email[0] != Email:
+                
+                print("Nombre de usuario ya tomado. ")
+                flash("El usuario ingresado ya esta en uso. ")
+                
+            else:
+                print("El usuario ya esta registrado en el sistema. ")
+                flash("Nombre de usuario e email ya registrados")
+
+    else:
+        #obtener los datos de la persona que va a editar
+        cursor = db.cursor()
+        cursor.execute('SELECT * FROM registro WHERE ID_Registro = %s', (id,))
+        data = cursor.fetchall()
+
+        return render_template('Editar.html', Koppe2 = data[0]) #Este personas corresponde al schema
+
 
 app.run(debug=True, port=5005)
