@@ -13,6 +13,7 @@ body {
     width: 350px;
     height: 500px;
     background: rgba(255, 255, 255, 0);
+    backdrop-filter: blur(5px);
     overflow: hidden;
     border-radius: 10px;
     box-shadow: 5px 20px 50px #000;
