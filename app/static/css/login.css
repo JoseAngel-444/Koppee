@@ -136,3 +136,42 @@ select option[selected] {
     background-color: #886823;
     color: #fff;
 }
+
+.alert 
+{
+    padding: 10px;
+    color: white;
+    margin-bottom: 15px;
+    opacity: 1;
+    transition: opacity 6000ms; /* 600ms to fade out */
+}
+
+.alert-success
+{
+    background-color: greenyellow;
+    color: #000;
+}
+
+.alert-danger
+{
+    background-color: lightcoral;
+}
+
+  /* The close button */
+.closebtn 
+{
+    margin-left: 15px;
+    color: white;
+    font-weight: bold;
+    float: right;
+    font-size: 22px;
+    line-height: 20px;
+    cursor: pointer;
+    transition: 0.5s;
+}
+
+/* When moving the mouse over the close button */
+.closebtn:hover 
+{
+    color: black;
+}
