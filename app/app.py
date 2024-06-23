@@ -58,62 +58,70 @@ def login_required(f):
 @app.route('/register', methods=['GET', 'POST'])
 def register():
 
-        if request.method == 'POST':
+    if request.method == 'POST':
 
-            username = request.form ['txt']
-            email = request.form['Email']
-            password = request.form['pswd']
+        username = request.form ['txt']
+        email = request.form['Email']
+        password = request.form['pswd']
 
 
-            if not username or not email or not password:
-                flash('Por favor, completa todos los campos.', 'danger')
-                return render_template('login.html')
+        if not username or not email or not password:
             
+            type_Flash = "alert-danger"
+            flash('Por favor, completa todos los campos.')
+            
+        cursor = db.cursor()
+        query = "SELECT * FROM Registro WHERE (Email_Cliente = %s OR Nombre_Cliente = %s) AND Rol_Usuario = 'cliente' "
+        cursor.execute(query, (email, username))
+        user = cursor.fetchone()
+            
+        if user is None:
+                
+            hashed_password = generate_password_hash(password, method='pbkdf2:sha256')
+
             cursor = db.cursor()
-            query = "SELECT * FROM Registro WHERE Email_Cliente = %s AND Rol_Usuario = 'cliente' AND Nombre_Cliente = %s"
-            cursor.execute(query, (email, username))
-            user = cursor.fetchone()
+            query = "INSERT INTO Registro (Nombre_Cliente, Email_Cliente, Contraseña_Usuario) VALUES (%s, %s, %s)"
+            values = (username, email, hashed_password)
+            cursor.execute(query, values)
+            db.commit()
+                
+            type_Flash = "alert-success"
+            flash('Usuario registrado correctamente!')
             
-            if user is None:
-                
-                type_Flash = "alert-success"
-                
-                hashed_password = generate_password_hash(password, method='pbkdf2:sha256')
+        else:
 
-                cursor = db.cursor()
-                query = "INSERT INTO Registro (Nombre_Cliente, Email_Cliente, Contraseña_Usuario) VALUES (%s, %s, %s)"
-                values = (username, email, hashed_password)
-                cursor.execute(query, values)
-                db.commit()
-                
-                
-                flash('Usuario registrado correctamente!')
-            
+            #Acá se declara de una vez la clase para el error ya que si entra al else significa
+            #que existe un usuario registrado ya sea con el nombre, email o ambos. 
+            #Por lo cual se declara de una vez para que déspues las posibles variaciones
+            #Contengan esta clase.
+
+            type_Flash = "alert-danger"    
+
+
+            cursor = db.cursor()
+            query = "SELECT Nombre_Cliente, Email_Cliente FROM Registro WHERE (Email_Cliente = %s OR Nombre_Cliente = %s) AND Rol_Usuario = 'cliente' "
+            cursor.execute(query, (email, username))
+            Is_Available = cursor.fetchone()
+
+            print(Is_Available[0], Is_Available[1])
+
+            if ((Is_Available[0] == username) and (Is_Available[1] == email)):
+
+                flash("Email y nombre de usuario ya registrados. ")
+
+            elif (Is_Available[0] == username):
+
+                flash("Nombre de usuario ya registrado. ")
+
+            elif (Is_Available[1] == email):
+
+                flash("Email ya registrado. ")
+
             else:
-                
-                cursor = db.cursor()
-                query = "SELECT Email_Cliente, Nombre_Cliente FROM Registro WHERE Email_Cliente = %s AND Rol_Usuario = 'cliente' AND Nombre_Cliente = %s"
-                cursor.execute(query, (email, username))
-                user = cursor.fetchone()
-                
-                type_Flash = "alert-danger"
-                
-                if (user[0] == email):
+
+                flash("Dev Log 001")
                     
-                    print("Solo email. ")
-                    flash("Email ya registrado. ")
-                    
-                    
-                elif (user[1] == username):
-                        
-                    print("Solo nombre.")
-                    flash("Nombre de usuario registrado. ")
-                
-                else:
-                    print("El usuario ya esta registrado en el sistema. ")
-                    flash("Nombre de usuario e email ya registrados")
-                    
-        return render_template('login.html', type_Flash=type_Flash) 
+    return render_template('login.html', type_Flash=type_Flash)
 
 @app.route('/login', methods=['GET', 'POST'])
 def login():
