@@ -281,6 +281,6 @@ def Admin_View():
     cursor.execute(query, )
     Listado_Users = cursor.fetchall()
     
-    return render_template('Admin_Page_View', Listado_Usuarios = Listado_Users)
+    return render_template('Admin_Page_View.html', Listado_Usuarios = Listado_Users)
 
 app.run(debug=True, port=5005)
