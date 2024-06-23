@@ -117,6 +117,9 @@ def register():
 
 @app.route('/login', methods=['GET', 'POST'])
 def login():
+
+    type_Flash = "alert"
+
     if request.method == 'POST':
         email = request.form['email']
         password = request.form['pswd']

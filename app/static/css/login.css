@@ -5,17 +5,19 @@ body {
     justify-content: center;
     align-items: center;
     min-height: 100vh;
-    font-family: 'poppins', sans-serif;
-    background: linear-gradient(to bottom, #6e0c14, #ac8b8c);
-    background-image: url('https://th.bing.com/th/id/R.fc15352c8c9a8b9ed1d84ee3ae69eca2?rik=O9%2fBqADkHmC0Tg&pid=ImgRaw&r=0');
+    font-family: 'Jost', sans-serif;
+    background: url("/static/img/lofi2.jpg") no-repeat center center/cover;
 }
 
 
-.main{
+.main
+{
     width: 350px;
     height: 500px;
+    background: rgba(255, 255, 255, 0);
+    backdrop-filter: blur(5px);
     overflow: hidden;
-    border-radius: 15px;
+    border-radius: 10px;
     box-shadow: 5px 20px 50px #000;
 }
 
@@ -31,49 +33,51 @@ body {
 
 label{
     color: #fff;
-    font-size: 2. 1em;
+    font-size: 2. 3em;
     justify-content: center;
     display: flex;
-    margin: 60px;
+    margin: 50px;
     font-weight: bold;
     cursor: pointer;
     transition: .5s ease-in-out;
 }
 
-input,
-button{
+input 
+{
     width: 60%;
-    height: 20px;
+    height: 10px;
     background: #e0dede;
     justify-content: center;
     display: flex;
-    margin: 30px auto;
-    padding: 10px;
+    margin: 20px auto;
+    padding: 12px;
     border: none;
     outline: none;
     border-radius: 5px;
 }
 
-button{
+button 
+{
     width: 60%;
     height: 40px;
     margin: 10px auto;
     justify-content: center;
     display: block;
     color: #fff;
-    background: #000000;
+    background: #886823;
+    font-size: 1em;
     font-weight: bold;
-    margin-top: 20px;
+    margin-top: 30px;
     outline: none;
     border: none;
     border-radius: 5px;
     transition: .2s ease-in;
-    text-transform: uppercase;
     cursor: pointer;
 }
 
-button:hover{
-    background: #f39c12;
+button:hover
+{
+    background: #886823;
 }
 
 .login{
@@ -85,10 +89,10 @@ button:hover{
 }
 
 .login label{
-    color: #000000;
+    color: #886823;
     transform: scale(.8);
 }
-
+/* 
 .login label.forgot-password {
     color: #f39c12;
     font-size: 14px;
@@ -100,7 +104,7 @@ button:hover{
 
 .login label.forgot-password:hover{
     color: #e85a4f;
-}
+} */
 
 #chk:checked ~ .login{
     transform: translateY(-500px);
@@ -111,7 +115,37 @@ button:hover{
 }
 
 #chk:checked ~ .signup label{
-    transform: scale(.8);
+    transform: scale(.6);
+}
+
+select {
+    width: 60%;
+    height: 40px;
+    margin: 10px auto;
+    justify-content: center;
+    display: block;
+    color: #fff;
+    background: #886823;
+    font-size: 1em;
+    font-weight: bold;
+    outline: none;
+    border: none;
+    border-radius: 5px;
+    transition: .2s ease-in;
+    cursor: pointer;
+    appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    padding: 0 10px;
+}
+
+
+select option {
+    background-color: #eee;
+    color: #333;
+    padding: 10px;
+    font-size: 1em;
+    border-bottom: 1px solid #ccc;
 }
 
 
