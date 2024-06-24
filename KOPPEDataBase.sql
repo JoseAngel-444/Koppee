@@ -46,3 +46,11 @@ ADD CONSTRAINT `ID_Persona_Reserva`
   REFERENCES `koppe2`.`registro` (`ID_Registro`)
   ON DELETE CASCADE
   ON UPDATE CASCADE;
+
+  CREATE TABLE Comentarios (
+    id INT PRIMARY KEY AUTO_INCREMENT,
+    texto VARCHAR(200) NOT NULL,
+    usuario_id INT NOT NULL,
+    fecha_creacion TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    FOREIGN KEY (usuario_id) REFERENCES Registro(ID_Registro)
+  );
