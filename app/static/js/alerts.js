@@ -15,8 +15,8 @@ for (i = 0; i < close.length; i++)
     // Set the opacity of div to 0 (transparent)
     div.style.opacity = "0";
 
-    // Hide the div after 600ms (the same amount of milliseconds it takes to fade out)
-    setTimeout(function(){ div.style.display = "none"; }, 6000);
+    // Hide the div after 150ms (the same amount of milliseconds it takes to fade out)
+    setTimeout(function(){ div.style.display = "none"; }, 1500);
 
   }
 }

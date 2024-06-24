@@ -33,7 +33,7 @@ class Usuario:
 @login_manager.user_loader
 def load_user(user_id):
     cursor = db.cursor()
-    query = "SELECT * FROM Registro WHERE 	ID_Registro = %s"
+    query = "SELECT * FROM Registro WHERE ID_Registro = %s"
     cursor.execute(query, (user_id))
     user_data = cursor.fetchone()
 
@@ -55,7 +55,7 @@ def login_required(f):
     return decorated_function
 
 
-@app.route('/register', methods=['GET', 'POST'])
+@app.route('/register', methods=['POST'])
 def register():
 
     if request.method == 'POST':
@@ -120,7 +120,13 @@ def register():
             else:
 
                 flash("Dev Log 001")
-                    
+
+    else:
+
+        type_Flash = "alert"
+        redirect(url_for('login'))
+
+
     return render_template('login.html', type_Flash=type_Flash)
 
 @app.route('/login', methods=['GET', 'POST'])
@@ -150,15 +156,13 @@ def login():
                 session['User'] = user[1]
                 session['Type_User'] = user[4]
                 
-                if user[4] == 'Administrador':
+                if user[4] == 'administrador':
                     
                     type_Flash = "alert-success"
-                    flash('Inicio de sesion exitoso!')
                     return redirect(url_for('Admin_View'));
                 
                 else:
                     type_Flash = "alert-success"
-                    flash('Inicio de sesion exitoso!')
                     return redirect(url_for('index'))
             
             else:
@@ -283,10 +287,73 @@ def logout():
 def Admin_View():
     
     cursor = db.cursor()
-    query = "SELECT * FROM Registro "
+    query = "SELECT * FROM Registro WHERE Rol_Usuario = 'cliente' "
     cursor.execute(query, )
     Listado_Users = cursor.fetchall()
     
-    return render_template('Admin_Page_View', Listado_Usuarios = Listado_Users)
+    return render_template('Admin_Page_View.html', Listado_Usuarios = Listado_Users)
 
+@app.route('/Editar_Usuario/<int:id>', methods = ['GET','POST'])
+def Editar_Usuario(id):
+
+    cursor = db.cursor()
+    if request.method == 'POST':
+
+        print("Esta entrando POST. ")
+        Username = request.form ['txt']
+        Email = request.form['Email']
+
+        cursor = db.cursor()
+        query = "SELECT Nombre_Cliente, Email_Cliente FROM Registro WHERE (Email_Cliente = %s OR Nombre_Cliente = %s) AND Rol_Usuario = 'cliente' And ID_Registro != %s"
+        cursor.execute(query, (Email, Username, id))
+        Is_Available = cursor.fetchone()
+
+        if Is_Available is None:
+
+            Update_Data = "UPDATE Registro set Nombre_Cliente = %s, Email_Cliente = %s Where ID_Registro = %s"
+            cursor.execute(Update_Data,(Username, Email, id))
+            db.commit()
+            type_Flash = "alert-success"
+            flash("Datos modificados exitosamente. ")
+
+            return redirect(url_for('Admin_View'))
+
+        else:
+
+            type_Flash = "alert-danger"
+            print(Is_Available[0], Is_Available[1])
+
+            if ((Is_Available[0] == Username) and (Is_Available[1] == Email)):
+
+                flash("Email y nombre de usuario ya registrados. ")
+
+            elif (Is_Available[0] == Username):
+
+                flash("Nombre de usuario ya registrado. ")
+
+            elif (Is_Available[1] == Email):
+
+                flash("Email ya registrado. ")
+
+            else:
+
+                flash("Dev Log 001")
+
+    else:
+        #obtener los datos de la persona que va a editar
+        type_Flash = "alert"
+
+        print("Esta llegando como GET. ")
+        cursor = db.cursor()
+        cursor.execute('SELECT * FROM registro WHERE ID_Registro = %s', (id,))
+        data = cursor.fetchall()
+
+        print(data)
+    
+    cursor = db.cursor()
+    cursor.execute('SELECT * FROM registro WHERE ID_Registro = %s', (id,))
+    data = cursor.fetchall()
+
+    return render_template('Editar.html', data = data[0], type_Flash = type_Flash) 
+    
 app.run(debug=True, port=5005)
