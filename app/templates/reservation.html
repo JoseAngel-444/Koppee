@@ -54,8 +54,9 @@
                         </div>
                     </div>
                     <a href="{{ url_for('contact') }}" class="nav-item nav-link">Contactos</a>
-                    <a href="{{ url_for('logout') }}" class="nav-item nav-link">Cerrar Sesión</a>
                     <a href="{{ url_for('login') }}" class="nav-item nav-link">Iniciar Sesión</a>
+                    <a href="{{ url_for('logout') }}" class="nav-item nav-link">Cerrar Sesión</a>
+                    
             </div>
             </div>
             </div>
@@ -131,11 +132,21 @@
                                     </select>
                                 </div>
                                 
+                                {% if 'User' in session %}
                                 <div>
-                                    <button class="btn btn-primary btn-block font-weight-bold py-3" type="submit" id="reservar">Reservar ahora</button>
-                                
-                                    
+                                    <button class="btn btn-primary btn-block font-weight-bold py-3" type="submit">Reservar ahora</button>
+
                                 </div>
+
+                                {% else %}
+
+                                <div>
+                                    <p> Para realizar una reserva debes iniciar sesión. </p>
+                                    <a href="{{ url_for('login') }} " class="btn btn-primary btn-block font-weight-bold py-3" >Iniciar Sesión</a>"
+                                </div>
+
+                                {% endif %}
+
                             </form>
                         </div>
                     </div>

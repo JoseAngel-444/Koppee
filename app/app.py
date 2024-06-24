@@ -196,7 +196,7 @@ def index():
 
 @app.route('/about') 
 def about():
-    return render_template('about.html')
+        return render_template('about.html')
 
 
 @app.route('/menu')
@@ -284,8 +284,12 @@ def servicio():
 
 
 @app.route('/sabermas1')
-def saber_mas():
+def historia_1():
     return render_template('sabermas1.html')
+
+@app.route('/vision')
+def vision_1():
+    return render_template('vision.html')
 
 @app.route('/logout')
 def logout():
