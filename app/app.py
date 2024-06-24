@@ -1,17 +1,19 @@
-from flask import Flask, render_template, redirect, request, url_for, flash, session, jsonify
-from flask_login import LoginManager
+from flask import Flask, render_template, redirect, request, url_for, flash, session
+from flask_login import LoginManager, current_user
 from functools import wraps
 import mysql.connector
 from werkzeug.security import generate_password_hash, check_password_hash
+from werkzeug.exceptions import abort
 import os
 import logging
+
 
 basedir = os.path.abspath(os.path.dirname(__file__))
 db_config = {
     'host': os.getenv('DB_HOST', 'localhost'),
     'user': os.getenv('DB_USER', 'root'),
     'password': os.getenv('DB_PASSWORD', ''),
-    'database': os.getenv('DB_NAME', 'Koppe2')
+    'database': os.getenv('DB_NAME', 'koppe2')
 }
 
 app = Flask(__name__)
@@ -28,12 +30,19 @@ class Usuario:
         self.id = id
         self.nombrecli = nombrecli
         self.email = email
+
+class Comentario:
+    def __init__(self, id, texto, usuario_id, fecha_creacion):
+        self.id = id
+        self.texto = texto
+        self.usuario_id = usuario_id
+        self.fecha_creacion = fecha_creacion
         
 
 @login_manager.user_loader
 def load_user(user_id):
     cursor = db.cursor()
-    query = "SELECT * FROM Registro WHERE ID_Registro = %s"
+    query = "SELECT * FROM Registro WHERE 	ID_Registro = %s"
     cursor.execute(query, (user_id))
     user_data = cursor.fetchone()
 

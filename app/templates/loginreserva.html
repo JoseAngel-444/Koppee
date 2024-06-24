@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+
+    <meta charset="utf-8">
+    <title>Formulario de inicio de sesión</title>
+    <link rel="stylesheet" href="{{url_for('static',filename='/css/loginreserva.css')}}">
+    </head>
+    <body>
+        <div class="wrapper">
+            <div class="title">Reserva Con Nosotros</div>
+            <form action="#">
+                <div class="field">
+                    <input type="text" placeholder="Correo electronico" required="">
+                    <label></label>
+                </div>
+                <div class="field">
+                    <input type="password"placeholder="Contraseña" required="">
+                    <label></label>
+                </div>
+                <div class="content">
+                    <div class="checkbox">
+                        <input type="checkbox" id="remember-me">
+                        <label for="remember-me">Recordar contraseña</label>
+                </div>
+                <div class="pass-link"><a href="#">¿Has olvidado tu contraseña?</a></div>
+                </div>
+                <div class="field">
+                    <a href="{{ url_for('index') }}" class="btn-link">Login</a>
+
+                </div>
+                <div class="signup-link">¿No es un usuario? <a href="{{ url_for('index') }}">Registrate ahora</a></div>
+            </form>
+
+        </div>
+    </body>
+
+</html>

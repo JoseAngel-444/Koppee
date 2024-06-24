@@ -3,13 +3,14 @@
 
 <head>
     <meta charset="utf-8">
-    <title>KOFFIN - Sitio web para tu cafetería</title>
+    <title>KOFFIN - Sitio web para tu cafeteria</title>
     <meta content="width=device-width, initial-scale=1.0" name="viewport">
     <meta content="Free Website Template" name="keywords">
     <meta content="Free Website Template" name="description">
 
   
-    <link href="img/favicon.ico" rel="icon">
+    <link href="{{url_for('static',filename='/img/LOGO.png')}}" rel="icon">
+    <link rel="icon" href="{{url_for('static',filename='/img/LOGO.png')}}" type="image/gif" />
 
    
     <link rel="preconnect" href="https://fonts.gstatic.com">
@@ -40,7 +41,7 @@
             </button>
             <div class="collapse navbar-collapse justify-content-between" id="navbarCollapse">
                 <div class="navbar-nav ml-auto p-4">
-                    <a href="{{ url_for('index') }}" class="nav-item nav-link">Inicio</a>
+                    <a href="{{url_for('index') }}" class="nav-item nav-link">Inicio</a>
                     <a href="{{ url_for('about') }}" class="nav-item nav-link">Acerca de</a>
                     <a href="{{ url_for('servicio') }}" class="nav-item nav-link">Servicios</a>
                     <a href="{{ url_for('menu') }}" class="nav-item nav-link">Menú</a>
@@ -52,8 +53,10 @@
                         </div>
                     </div>
                     <a href="{{ url_for('contact') }}" class="nav-item nav-link">Contactos</a>
-                    <a href="{{ url_for('logout') }}" class="nav-item} nav-link btn btn-outline-primary">Cerrar Sesión</a>
-                </div>
+                    <a href="{{ url_for('logout') }}" class="nav-item nav-link">Cerrar Sesión</a>
+                    <a href="{{ url_for('login') }}" class="nav-item nav-link">Iniciar Sesión</a>
+            </div>
+            </div>
             </div>
         </nav>
     </div>
@@ -80,65 +83,76 @@
                 <h4 class="text-primary text-uppercase" style="letter-spacing: 5px;">Referencias</h4>
                 <h1 class="display-4">Nuestros clientes opinan</h1>
             </div>
-            <div class="col-lg-4 mb-5">
-                <div class="testimonial-item">
-                    <div class="d-flex align-items-center mb-3">
-                        <img class="img-fluid rounded-circle mb-3 mb-sm-0" src="{{url_for('static',filename='/img/testimonial-1.jpg')}}" alt="">
-                        <div class="ml-3">
-                            <h4>Maria Alejandra Lopez</h4>
-                            <i>Estudiante</i>
+            <div class="row">
+                <div class="col-lg-4 mb-5">
+                    <div class="testimonial-item">
+                        <div class="d-flex align-items-center mb-3">
+                            <img class="img-fluid rounded-circle mb-3 mb-sm-0" src="{{url_for('static',filename='/img/testimonial-1.jpg')}}" alt="">
+                            <div class="ml-3">
+                                <h4>Johan Gonzalez</h4>
+                                <i>Estudiante</i>
+                            </div>
                         </div>
+                        <p class="m-0">Me gusta mucho disfrutar de un rico café mientras estudio para mis exámenes, y en KOFFIN encontré eso que tanto buscaba.</p>
                     </div>
-                    <p class="m-0">Me gusta mucho disfrutar de un rico cafe mientras estudio para mis exámenes, y en KOFFIN encontré eso que tanto buscaba.</p>
+                </div>
+                <div class="col-lg-4 mb-5">
+                    <div class="testimonial-item">
+                        <div class="d-flex align-items-center mb-3">
+                            <img class="img-fluid rounded-circle mb-3 mb-sm-0" src="{{url_for('static',filename='/img/testimonial-2.jpg')}}" alt="">
+                            <div class="ml-3">
+                                <h4>Jose Angel Arrieta</h4>
+                                <i>Estudiante</i>
+                            </div>
+                        </div>
+                        <p class="m-0">No te pasa que buscas un lugar para compartir con tus amigos y familiares y ninguno te convence, bueno, en KOFFIN todo eso cambió, en este lugar encontré lo que buscaba y me llevé una de las mejores experiencias..</p>
+                    </div>
+                </div>
+                <div class="col-lg-4 mb-5">
+                    <div class="testimonial-item">
+                        <div class="d-flex align-items-center mb-3">
+                            <img class="img-fluid rounded-circle mb-3 mb-sm-0" src="{{url_for('static',filename='/img/testimonial-3.jpg')}}" alt="">
+                            <div class="ml-3">
+                                <h4>Diego Mesa</h4>
+                                <i>Maestra</i>
+                            </div>
+                        </div>
+                        <p class="m-0">KOFFIN me inspira, me relaja, me hace sentir tranquilidad después de arduo trabajo.</p>
+                    </div>
+                </div>
+                <div class="col-lg-4 mb-5">
+                    <div class="testimonial-item">
+                        <div class="d-flex align-items-center mb-3">
+                            <img class="img-fluid rounded-circle mb-3 mb-sm-0" src="{{url_for('static',filename='/img/testimonial-4.jpg')}}" alt="">
+                            <div class="ml-3">
+                                <h4>Daniel Cruz</h4>
+                                <i>Ingeniero</i>
+                            </div>
+                        </div>
+                        <p class="m-0">JA JA JA no busques más, KOFFIN es todo lo que necesitas, más si no encuentras en qué entretenerse después de una larga jornada de trabajo.</p>
+                    </div>
                 </div>
             </div>
-            <div class="col-lg-4 mb-5">
-                <div class="testimonial-item">
-                    <div class="d-flex align-items-center mb-3">
-                        <img class="img-fluid rounded-circle mb-3 mb-sm-0" src="{{url_for('static',filename='/img/testimonial-2.jpg')}}" alt="">
-                        <div class="ml-3">
-                            <h4>Jose Angel Arrieta</h4>
-                            <i>Estudiante</i>
-                        </div>
-                    </div>
-                    <p class="m-0">No te pasa que buscas un lugar para compartir con tus amigos y familiares y ninguno te convence, bueno, en KOFFIN todo eso cambio, en este lugar encontré lo que buscaba y me lleve una de las mejores experiencias..</p>
+            <div>
+                <a href="#" class="btn btn-primary btn-block font-weight-bold py-3 alerta-login" type="submit" data-toggle="collapse" data-target="#opinion-form">Deja tu opinión</a>
+                <div id="opinion-form" class="collapse">
+                    <form id="opinion-form-inner">
+                        <textarea id="opinion-text" placeholder="Escribe tu opinión aquí..."></textarea>
+                        <button type="submit" class="btn btn-primary">Enviar</button>
+                    </form>
                 </div>
-            </div>
-            <div class="col-lg-4 mb-5">
-                <div class="testimonial-item">
-                    <div class="d-flex align-items-center mb-3">
-                        <img class="img-fluid rounded-circle mb-3 mb-sm-0" src="{{url_for('static',filename='/img/testimonial-3.jpg')}}" alt="">
-                        <div class="ml-3">
-                            <h4>Fernanda Lopez</h4>
-                            <i>Maestra</i>
-                        </div>
-                    </div>
-                    <p class="m-0">KOFFIN me inspira, me relaja, me hace sentir tranquilidad después de arduo trabajo.</p>
-                </div>
-            </div>
-            <div class="col-lg-4 mb-5">
-                <div class="testimonial-item">
-                    <div class="d-flex align-items-center mb-3">
-                        <img class="img-fluid rounded-circle mb-3 mb-sm-0" src="{{url_for('static',filename='/img/testimonial-4.jpg')}}" alt="">
-                        <div class="ml-3">
-                            <h4>Roberto Rojas Guzman</h4>
-                            <i>Ingeniero</i>
-                        </div>
-                    </div>
-                    <p class="m-0">JA JA JA no busques mas, KOFFIN es todo lo que necesitas, mas si no encuentras en que entretenerte después de una larga jornada de trabajo.</p>
-                </div>
+                <div id="new-opinion-container"></div>
             </div>
         </div>
     </div>
-</div>
 
 
 
     <div class="container-fluid footer text-white mt-5 pt-5 px-0 position-relative overlay-top">
         <div class="row mx-0 pt-5 px-sm-3 px-lg-5 mt-4">
             <div class="col-lg-3 col-md-6 mb-5">
-                <h4 class="text-white text-uppercase mb-4" style="letter-spacing: 3px;">Contáctanos</h4>
-                <p><i class="fa fa-map-marker-alt mr-2"></i>Colombia - Bogota DC - calle: 43 AV 7</p>
+                <h4 class="text-white text-uppercase mb-4" style="letter-spacing: 3px;">Pongase en contacto</h4>
+                <p><i class="fa fa-map-marker-alt mr-2"></i>Colombia - Bogotá DC - calle: 43 AV 7</p>
                 <p><i class="fa fa-phone-alt mr-2"></i>321-249-6589</p>
                 <p class="m-0"><i class="fa fa-envelope mr-2"></i>KOFFIN149@gmail.com</p>
             </div>
@@ -179,18 +193,19 @@
 
 
 
-        <div class="container-fluid text-center text-white border-top mt-4 py-4 px-sm-3 px-md-5" style="border-color: rgba(256, 256, 256, .1) !important;">
+            <div class="container-fluid text-center text-white border-top mt-4 py-4 px-sm-3 px-md-5" style="border-color: rgba(256, 256, 256, .1) !important;">
             <p class="mb-2 text-white">Derechos de autor &copy; <a class="font-weight-bold" href="#">Dominio</a>. Todos los derechos reservados.</a></p>
-            <p class="m-0 text-white">Diseñado Por <a class="font-weight-bold" href="https://htmlcodex.com">@Jose Angel, @Diego Mesa, @Daniel Cruz & @Johan Gonzalez</a></p>
+            <p class="m-0 text-white">Diseñado por <a class="font-weight-bold" href="#">@Jose Angel (Junior programmer)</a></p>
         </div>
     </div>
     
 
-    
+
     <a href="#" class="btn btn-lg btn-primary btn-lg-square back-to-top"><i class="fa fa-angle-double-up"></i></a>
 
 
     <!-- JavaScript Libraries -->
+    <script src="{{url_for('static',filename='js/alertalogin.js')}}"></script>
     <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.bundle.min.js"></script>
     <script src="{{url_for('static',filename='/lib/easing/easing.min.js')}}"></script>
@@ -206,6 +221,8 @@
 
     <!-- Template Javascript -->
     <script src="{{url_for('static',filename='/js/main.js')}}"></script>
+
+    <script src="{{url_for('static',filename='js/reseña.js')}}"></script>
 </body>
 
 </html>
