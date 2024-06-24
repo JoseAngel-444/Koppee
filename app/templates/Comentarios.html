@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+
+{% block content %}
+  <h1>Comentarios</h1>
+  <ul>
+    {% for comment in comments %}
+      <li>
+        {{ comment.text }}
+        {% if comment.user_id == current_user.id %}
+          <a href="{{ url_for('comments.edit_comment', comment_id=comment.id) }}">Editar</a>
+          <form action="{{ url_for('comments.delete_comment', comment_id=comment.id) }}" method="post">
+            <button type="submit">Eliminar</button>
+          </form>
+        {% endif %}
+      </li>
+    {% endfor %}
+  </ul>
+  <form action="" method="post">
+    <textarea name="text"></textarea>
+    <button type="submit">Comentar</button>
+  </form>
+{% endblock %}
