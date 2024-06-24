@@ -6,7 +6,7 @@ body {
     align-items: center;
     min-height: 100vh;
     font-family: 'Jost', sans-serif;
-    background: url("/static/img/lofi2.jpg") no-repeat center center/cover;
+    background: url("/static/img/zorro.jpg") no-repeat center center/cover;
 }
 
 .main {
@@ -60,7 +60,7 @@ button {
     justify-content: center;
     display: block;
     color: #fff;
-    background: #886823;
+    background: rgb(218, 159, 91);
     font-size: 1em;
     font-weight: bold;
     margin-top: 30px;
@@ -72,7 +72,7 @@ button {
 }
 
 button:hover {
-    background: #886823;
+    background-color: #be792b;
 }
 
 .login {
@@ -84,7 +84,7 @@ button:hover {
 }
 
 .login label {
-    color: #886823;
+    color: rgb(218, 159, 91);
     transform: scale(.6);
 }
 
@@ -108,7 +108,7 @@ select {
     justify-content: center;
     display: block;
     color: #fff;
-    background: #886823;
+    background: rgb(218, 159, 91);
     font-size: 1em;
     font-weight: bold;
     outline: none;
