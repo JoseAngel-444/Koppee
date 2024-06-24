@@ -24,6 +24,13 @@
     
 </head>
 <body>
+
+    <nav>
+        <ul>
+            <li> <a href="{{ url_for('logout') }}" class="nav-item nav-link">Cerrar sesión</a></li>
+        </ul>
+    </nav>
+
     <table>
         <tr> 
             <th> Código </th> <th> Nombre </th> <th> Nombre de Usuario </th> <th> Correo </th> <th> Opciones </th>
@@ -39,7 +46,7 @@
 
                 <td>
                     <a href=" {{ url_for ('Editar_Usuario', id = Listado_Users[0]) }} "> <button> Editar </button> </a>
-                    <a href=""> <button> Eliminar </button> </a>
+                    <a href=" {{ url_for ('Eliminar_Usuario', id = Listado_Users[0] )}} "> <button> Eliminar </button> </a>
                 </td>
     
             </tr>

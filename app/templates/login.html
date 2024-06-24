@@ -38,7 +38,7 @@
     <div class="login">
         <form action="{{ url_for('login') }}" method="post">
             <label for="chk" aria-hidden="true">Ingresar</label>
-            <input type="email" name="email" placeholder="Correo electrónico" required="">
+            <input type="email" name="email" placeholder="Correo electrónico" required=" ¡Ingrese su correo electrónico aquí! ">
             <input type="password" name="pswd" placeholder="Clave" required="">
             <select name="role" required="">
                 <option value="cliente">Cliente</option>

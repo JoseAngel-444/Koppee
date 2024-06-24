@@ -277,10 +277,15 @@ def servicio():
 def saber_mas():
     return render_template('sabermas1.html')
 
-@app.route('/logout', methods= ['GET', 'POST'])
+@app.route('/logout')
 def logout():
-    # Aquí va el código para cerrar la sesión del usuario
-    return render_template('logout.html')
+    
+    session.clear()
+    
+    print("Sesión eliminada")
+
+    return redirect(url_for('login'))
+
 
 
 @app.route('/admin_view')
@@ -355,5 +360,14 @@ def Editar_Usuario(id):
     data = cursor.fetchall()
 
     return render_template('Editar.html', data = data[0], type_Flash = type_Flash) 
+
+@app.route('/Eliminar_Usuario/<int:id>', methods=['GET'])
+def Eliminar_Usuario(id):
     
+    cursor = db.cursor();
+    cursor.execute('DELETE FROM Registro WHERE ID_Registro = %s', (id,))
+    db.commit()
+    return redirect(url_for('Admin_View'))
+    
+
 app.run(debug=True, port=5005)

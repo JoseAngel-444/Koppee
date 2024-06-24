@@ -128,9 +128,20 @@
                                     </select>
                                 </div>
                                 
-                                <div>
-                                    <button class="btn btn-primary btn-block font-weight-bold py-3" type="submit">Reservar ahora</button>
-                                </div>
+                                {% if 'User' in session %}
+                                    <div>
+                                        <button class="btn btn-primary btn-block font-weight-bold py-3" type="submit">Reservar ahora</button>
+                                    </div>
+                                
+                                {% else %}
+
+                                    <div>
+                                        <p> Para realizar una reserva debes de iniciar sesión. </p>
+                                        <a href=" {{ url_for('login') }} " class="btn btn-primary btn-block font-weight-bold py-3" >Iniciar Sesión</a>
+                                    </div>
+                                    
+                                {% endif %}
+
                             </form>
                         </div>
                     </div>
