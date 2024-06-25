@@ -242,12 +242,13 @@ def reservation():
             print(ID_User)
 
             cursor = db.cursor()
-            query = "SELECT * FROM Reservas Where Cliente_ID_F = %s"
-            cursor.execute(query, (ID_User,))
+            query = "SELECT * FROM Reservas Where Cliente_ID_F = %s AND Fecha_Reserva = %s"
+            cursor.execute(query, (ID_User, Fecha_Reserva))
             user_reservation = cursor.fetchone()
 
             print(Fecha_Reserva)
             print(user_reservation)
+            print(Num_Personas_Reserva)
 
             if user_reservation is None:
                 
