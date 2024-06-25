@@ -99,7 +99,18 @@
                     <div class="col-lg-6">
                         <div class="text-center p-5" style="background: rgba(51, 33, 29, .8);">
                             <h1 class="text-white mb-4 mt-5">Reserva tu mesa</h1>
-                            <form action="/reservation" method="post" class="mb-5">
+                            
+                            <form action="{{ url_for('reservation') }}" method="post" class="mb-5">
+                                
+                                {% for message in get_flashed_messages() %}
+
+                                <div class="alert {{ type_Flash }}">
+                                    <span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span>
+                                    {{ message }}
+                                </div> 
+                        
+                                {% endfor %}
+                                
                                 <div class="form-group">
                                     <input name="Name_Form" type="text" class="form-control bg-transparent border-primary p-4 text-white" placeholder="Nombre"
                                         required="required" />

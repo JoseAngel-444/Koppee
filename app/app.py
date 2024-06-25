@@ -219,7 +219,7 @@ def reservation():
         Num_Personas_Reserva = request.form['Num_Personas']
 
         cursor = db.cursor()
-        query = "SELECT * FROM Registro WHERE Email_Cliente = %s AND Nombre_Cliente = %s;"
+        query = "SELECT * FROM Registro WHERE Email_Cliente = %s AND Nombre_Cliente = %s"
         cursor.execute(query, (Email_User, Nombre_User))
         user = cursor.fetchone()
         
@@ -238,10 +238,14 @@ def reservation():
             print("Si entra al else.  :D .")
             ID_User = user[0]
             
-            cursor = db.cursor()
+            print(ID_User)
+
+            cursor = db.cursor() 
             query = "SELECT * FROM Reservas Where Cliente_ID_F = %s"
             cursor.execute(query, (ID_User,))
-            user_reservation = cursor.fetchall()
+            user_reservation = cursor.fetchone()
+
+            print(user_reservation)
             
             if user_reservation is None:
             
@@ -264,6 +268,67 @@ def reservation():
         type_Flash = "alert"
         
     return render_template('reservation.html', type_Flash=type_Flash)
+
+# /* @app.route('/reservation', methods= ['GET', 'POST'])
+# def reservation():
+    
+#     print("En la página web.")
+    
+#     if request.method == 'POST':
+        
+#         print("Si entra :)")
+#         Nombre_User = request.form['Name_Form']
+#         Email_User = request.form['Email_Form']
+#         Fecha_Reserva = request.form['Date_Form']
+#         Hora_Reserva = request.form['Hora_Form']
+#         Num_Personas_Reserva = request.form['Num_Personas']
+
+#         cursor = db.cursor()
+#         query = "SELECT * FROM Registro WHERE Email_Cliente = %s AND Nombre_Cliente = %s;"
+#         cursor.execute(query, (Email_User, Nombre_User))
+#         user = cursor.fetchone()
+        
+#         print(Email_User, " ", Nombre_User)
+#         print(user)
+        
+#         if user is None:
+            
+#             type_Flash = "alert-danger"            
+#             flash("Email y Usuario no encontrados. ")
+            
+#             print("Usuario No encontrado, verifique que el correo y contraseña sean validos. ")
+            
+#         else:
+            
+#             print("Si entra al else.  :D .")
+#             ID_User = user[0]
+            
+#             cursor = db.cursor()
+#             query = "SELECT * FROM Reservas Where Cliente_ID_F = %s"
+#             cursor.execute(query, (ID_User,))
+#             user_reservation = cursor.fetchall()
+            
+#             if user_reservation is None:
+            
+#                 cursor = db.cursor()
+#                 query = "INSERT INTO Reservas (Cantidad_De_Sillas, Hora_Reserva, Fecha_Reserva, Cliente_ID_F) VALUES (%s, %s, %s, %s)"
+#                 values = (Num_Personas_Reserva, Hora_Reserva, Fecha_Reserva, ID_User)
+#                 cursor.execute(query, values)
+#                 db.commit()
+                
+#                 type_Flash = "alert-success"
+#                 flash('Reserva creada exitosamente!')
+                
+#             else:
+                
+#                 type_Flash = "alert-danger"
+#                 flash("El usuario ya realizo una reserva. ")
+            
+#     else:
+        
+#         type_Flash = "alert"
+        
+#     return render_template('reservation.html', type_Flash=type_Flash) */
 
 @app.route('/success')
 def success():

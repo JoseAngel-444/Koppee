@@ -144,6 +144,8 @@ select option[selected] {
     margin-bottom: 15px;
     opacity: 1;
     transition: opacity 1500ms; /* 150ms to fade out */
+    position: absolute;
+    margin-top: -50px;
 }
 
 .alert-success
