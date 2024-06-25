@@ -37,7 +37,7 @@ class Comentario:
         self.texto = texto
         self.usuario_id = usuario_id
         self.fecha_creacion = fecha_creacion
-        
+
 
 @login_manager.user_loader
 def load_user(user_id):
@@ -52,7 +52,7 @@ def load_user(user_id):
     else:
         return None
 
-    
+
 
 def login_required(f):
     @wraps(f)
@@ -75,17 +75,17 @@ def register():
 
 
         if not username or not email or not password:
-            
+
             type_Flash = "alert-danger"
             flash('Por favor, completa todos los campos.')
-            
+
         cursor = db.cursor()
         query = "SELECT * FROM Registro WHERE (Email_Cliente = %s OR Nombre_Cliente = %s) AND Rol_Usuario = 'cliente' "
         cursor.execute(query, (email, username))
         user = cursor.fetchone()
-            
+
         if user is None:
-                
+
             hashed_password = generate_password_hash(password, method='pbkdf2:sha256')
 
             cursor = db.cursor()
@@ -93,18 +93,18 @@ def register():
             values = (username, email, hashed_password)
             cursor.execute(query, values)
             db.commit()
-                
+
             type_Flash = "alert-success"
             flash('Usuario registrado correctamente!')
-            
+
         else:
 
             #Acá se declara de una vez la clase para el error ya que si entra al else significa
-            #que existe un usuario registrado ya sea con el nombre, email o ambos. 
+            #que existe un usuario registrado ya sea con el nombre, email o ambos.
             #Por lo cual se declara de una vez para que déspues las posibles variaciones
             #Contengan esta clase.
 
-            type_Flash = "alert-danger"    
+            type_Flash = "alert-danger"
 
 
             cursor = db.cursor()
@@ -148,13 +148,13 @@ def login():
         print("Entra al POST. UWU ")
         email = request.form['email']
         password = request.form['pswd']
-        role = request.form['role'] 
+        role = request.form['role']
 
         cursor = db.cursor()
         query = "SELECT * FROM Registro WHERE Email_Cliente = %s AND Rol_Usuario = %s"
         cursor.execute(query, (email, role))
         user = cursor.fetchone()
-        
+
         if user is not None:
 
             stored_hash = user[3]
@@ -162,27 +162,28 @@ def login():
             print("Aca esta la validacion: ", validacion)
 
             if validacion:
-            
+
                 session['ID_Registro'] = user[0]
                 session['User'] = user[1]
+                session['Email'] = user[2]
                 session['Type_User'] = user[4]
-                
+
                 if user[4] == 'administrador':
-                    
+
                     type_Flash = "alert-success"
                     return redirect(url_for('Admin_View'));
-                
+
                 else:
                     type_Flash = "alert-success"
                     return redirect(url_for('index'))
-            
+
             else:
                 type_Flash = "alert-danger"
                 print("Error en la validacion de la contraseña")
                 flash("Contraseña incorrecta. ")
-                
+
         else:
-            
+
             type_Flash = "alert-danger"
             flash("Usuario no registrado.")
             print("Usuario no registrado. ")
@@ -190,12 +191,12 @@ def login():
 
     return render_template('login.html', type_Flash=type_Flash)
 
-@app.route('/', methods = ['GET', 'POST']) 
+@app.route('/', methods = ['GET', 'POST'])
 def index():
-    
+
         return render_template('index.html')
 
-@app.route('/about') 
+@app.route('/about')
 def about():
     return render_template('about.html')
 
@@ -206,11 +207,11 @@ def menu():
 
 @app.route('/reservation', methods= ['GET', 'POST'])
 def reservation():
-    
+
     print("En la página web.")
-    
+
     if request.method == 'POST':
-        
+
         print("Si entra :)")
         Nombre_User = request.form['Name_Form']
         Email_User = request.form['Email_Form']
@@ -222,60 +223,74 @@ def reservation():
         query = "SELECT * FROM Registro WHERE Email_Cliente = %s AND Nombre_Cliente = %s"
         cursor.execute(query, (Email_User, Nombre_User))
         user = cursor.fetchone()
-        
+
         print(Email_User, " ", Nombre_User)
         print(user)
-        
+
         if user is None:
-            
-            type_Flash = "alert-danger"            
+
+            type_Flash = "alert-danger"
             flash("Email y Usuario no encontrados. ")
-            
+
             print("Usuario No encontrado, verifique que el correo y contraseña sean validos. ")
-            
+
         else:
-            
+
             print("Si entra al else.  :D .")
             ID_User = user[0]
-            
+
             print(ID_User)
 
-            cursor = db.cursor() 
+            cursor = db.cursor()
             query = "SELECT * FROM Reservas Where Cliente_ID_F = %s"
             cursor.execute(query, (ID_User,))
             user_reservation = cursor.fetchone()
 
+            print(Fecha_Reserva)
             print(user_reservation)
-            
+
             if user_reservation is None:
-            
+                
                 cursor = db.cursor()
-                query = "INSERT INTO Reservas (Cantidad_De_Sillas, Hora_Reserva, Fecha_Reserva, Cliente_ID_F) VALUES (%s, %s, %s, %s)"
-                values = (Num_Personas_Reserva, Hora_Reserva, Fecha_Reserva, ID_User)
+                query = "SELECT * FROM Reservas WHERE Cantidad_De_Sillas = %s AND Fecha_Reserva = %s"
+                values = (Num_Personas_Reserva, Fecha_Reserva)
                 cursor.execute(query, values)
-                db.commit()
-                
-                type_Flash = "alert-success"
-                flash('Reserva creada exitosamente!')
-                
+                Date_And_Table_Validation = cursor.fetchone()
+
+                if Date_And_Table_Validation is None:
+
+                    cursor = db.cursor()
+                    query = "INSERT INTO Reservas (Cantidad_De_Sillas, Hora_Reserva, Fecha_Reserva, Cliente_ID_F) VALUES (%s, %s, %s, %s)"
+                    values = (Num_Personas_Reserva, Hora_Reserva, Fecha_Reserva, ID_User)
+                    cursor.execute(query, values)
+                    db.commit()
+
+                    type_Flash = "alert-success"
+                    flash('Reserva creada exitosamente!')
+
+                else:
+
+                    type_Flash = "alert-danger"
+                    flash("La mesa para " + Num_Personas_Reserva + " Ya fue reservada para el día seleccionado. (" + Fecha_Reserva + ").")
+
             else:
-                
+
                 type_Flash = "alert-danger"
                 flash("El usuario ya realizo una reserva. ")
-            
+
     else:
-        
+
         type_Flash = "alert"
-        
+
     return render_template('reservation.html', type_Flash=type_Flash)
 
 # /* @app.route('/reservation', methods= ['GET', 'POST'])
 # def reservation():
-    
+
 #     print("En la página web.")
-    
+
 #     if request.method == 'POST':
-        
+
 #         print("Si entra :)")
 #         Nombre_User = request.form['Name_Form']
 #         Email_User = request.form['Email_Form']
@@ -287,47 +302,47 @@ def reservation():
 #         query = "SELECT * FROM Registro WHERE Email_Cliente = %s AND Nombre_Cliente = %s;"
 #         cursor.execute(query, (Email_User, Nombre_User))
 #         user = cursor.fetchone()
-        
+
 #         print(Email_User, " ", Nombre_User)
 #         print(user)
-        
+
 #         if user is None:
-            
-#             type_Flash = "alert-danger"            
+
+#             type_Flash = "alert-danger"
 #             flash("Email y Usuario no encontrados. ")
-            
+
 #             print("Usuario No encontrado, verifique que el correo y contraseña sean validos. ")
-            
+
 #         else:
-            
+
 #             print("Si entra al else.  :D .")
 #             ID_User = user[0]
-            
+
 #             cursor = db.cursor()
 #             query = "SELECT * FROM Reservas Where Cliente_ID_F = %s"
 #             cursor.execute(query, (ID_User,))
 #             user_reservation = cursor.fetchall()
-            
+
 #             if user_reservation is None:
-            
+
 #                 cursor = db.cursor()
 #                 query = "INSERT INTO Reservas (Cantidad_De_Sillas, Hora_Reserva, Fecha_Reserva, Cliente_ID_F) VALUES (%s, %s, %s, %s)"
 #                 values = (Num_Personas_Reserva, Hora_Reserva, Fecha_Reserva, ID_User)
 #                 cursor.execute(query, values)
 #                 db.commit()
-                
+
 #                 type_Flash = "alert-success"
 #                 flash('Reserva creada exitosamente!')
-                
+
 #             else:
-                
+
 #                 type_Flash = "alert-danger"
 #                 flash("El usuario ya realizo una reserva. ")
-            
+
 #     else:
-        
+
 #         type_Flash = "alert"
-        
+
 #     return render_template('reservation.html', type_Flash=type_Flash) */
 
 @app.route('/success')
@@ -355,9 +370,9 @@ def saber_mas():
 
 @app.route('/logout')
 def logout():
-    
+
     session.clear()
-    
+
     print("Sesión eliminada")
 
     return redirect(url_for('login'))
@@ -366,12 +381,12 @@ def logout():
 
 @app.route('/admin_view')
 def Admin_View():
-    
+
     cursor = db.cursor()
     query = "SELECT * FROM Registro WHERE Rol_Usuario = 'cliente' "
     cursor.execute(query, )
     Listado_Users = cursor.fetchall()
-    
+
     return render_template('Admin_Page_View.html', Listado_Usuarios = Listado_Users)
 
 @app.route('/Editar_Usuario/<int:id>', methods = ['GET','POST'])
@@ -430,20 +445,20 @@ def Editar_Usuario(id):
         data = cursor.fetchall()
 
         print(data)
-    
+
     cursor = db.cursor()
     cursor.execute('SELECT * FROM registro WHERE ID_Registro = %s', (id,))
     data = cursor.fetchall()
 
-    return render_template('Editar.html', data = data[0], type_Flash = type_Flash) 
+    return render_template('Editar.html', data = data[0], type_Flash = type_Flash)
 
 @app.route('/Eliminar_Usuario/<int:id>', methods=['GET'])
 def Eliminar_Usuario(id):
-    
+
     cursor = db.cursor();
     cursor.execute('DELETE FROM Registro WHERE ID_Registro = %s', (id,))
     db.commit()
     return redirect(url_for('Admin_View'))
-    
+
 
 app.run(debug=True, port=5005)

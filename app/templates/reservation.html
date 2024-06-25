@@ -111,12 +111,14 @@
                         
                                 {% endfor %}
                                 
+                                {% if 'User' in session %}
+
                                 <div class="form-group">
-                                    <input name="Name_Form" type="text" class="form-control bg-transparent border-primary p-4 text-white" placeholder="Nombre"
+                                    <input value="{{session['User']}}" name="Name_Form" type="text" class="form-control bg-transparent border-primary p-4 text-white" placeholder="Nombre"
                                         required="required" />
                                 </div>
                                 <div class="form-group">
-                                    <input name="Email_Form" type="email" class="form-control bg-transparent border-primary p-4 text-white" placeholder="Correo electrónico"
+                                    <input value="{{session['Email']}}" name="Email_Form" type="email" class="form-control bg-transparent border-primary p-4 text-white" placeholder="Correo electrónico"
                                         required="required" />
                                 </div>
                                 <div class="form-group">
@@ -139,6 +141,36 @@
                                     </select>
                                 </div>
                                 
+                                {% else %}
+
+                                <div class="form-group">
+                                    <input name="Name_Form" type="text" class="form-control bg-alert border-danger p-4 text-white" placeholder="Nombre" required="required" disabled/>
+                                </div>
+                                <div class="form-group">
+                                    <input name="Email_Form" type="email" class="form-control bg-alert border-danger p-4 text-white" placeholder="Correo electrónico" required="required" disabled/>
+                                </div>
+                                <div class="form-group">
+                                    <div class="date" id="date">
+                                        <input name="Date_Form" type="date" class="form-control bg-alert border-danger p-4 datetimepicker-input text-dark" placeholder="Fecha" data-target="#date" data-toggle="datetimepicker" disabled/>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <div class="time disabled" id="time" >
+                                        <input name="Hora_Form" type="time" class="form-control bg-alert border-danger p-4 datetimepicker-input text-dark disabled" placeholder="Hora" disabled/>
+                                    </div>
+                                </div>
+                                <div class="form-group form-group-reservation">
+                                    <select name="Num_Personas" class="custom-select bg-alert border-danger px-4 disabled" style="height: 49px;" disabled>
+                                        <option selected value="2">2 Personas</option>
+                                        <option value="3">3 Personas</option>
+                                        <option value="3">4 Personas</option>
+                                        <option value="3">5 Personas</option>
+                                        <option value="3">6 Personas</option>
+                                    </select>
+                                </div>
+
+                                {% endif %}
+
                                 {% if 'User' in session %}
                                     <div>
                                         <button class="btn btn-primary btn-block font-weight-bold py-3" type="submit">Reservar ahora</button>
@@ -147,7 +179,7 @@
                                 {% else %}
 
                                     <div>
-                                        <p> Para realizar una reserva debes de iniciar sesión. </p>
+                                        <h3 class="text-primary"> Para realizar una reserva debes de iniciar sesión. <h3/>
                                         <a href=" {{ url_for('login') }} " class="btn btn-primary btn-block font-weight-bold py-3" >Iniciar Sesión</a>
                                     </div>
                                     
