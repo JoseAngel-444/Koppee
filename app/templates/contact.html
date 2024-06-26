@@ -51,7 +51,11 @@
                         </div>
                     </div>
                     <a href="{{ url_for('contact') }}" class="nav-item nav-link">Contactos</a>
-                    <a href="{{ url_for('logout') }}" class="nav-item nav-link btn btn-outline-primary">Cerrar Sesión</a>
+                    {% if 'User' in session %}
+                        <a href="{{ url_for('logout') }}" class="nav-item nav-link">Cerrar sesión</a>
+                    {% else %}
+                        <a href="{{ url_for('login') }}" class="nav-item nav-link">Iniciar sesión</a>
+                    {% endif %}
                 </div>
             </div>
         </nav>

@@ -30,7 +30,7 @@
     <nav>
         <ul>
             <li> <a href="{{ url_for('logout') }}" class="nav-item nav-link">Cerrar sesión</a></li>
-            <li> <a href="{{ url_for('Admin_View_Reservas') }}" class="nav-item nav-link">Reservas</a></li>
+            <li> <a href="{{ url_for('Admin_View') }}" class="nav-item nav-link">Usuarios</a></li>
         </ul>
     </nav>
 
@@ -42,6 +42,7 @@
         {% for Listado_Users in Listado_Usuarios %}
 
             <tr>
+        
                 <td> {{ Listado_Users[1] }} </td> 
                 <td> {{ Listado_Users[2] }} </td>
                 <td> {{ Listado_Users[4] }} </td>
