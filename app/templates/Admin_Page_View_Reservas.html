@@ -36,16 +36,18 @@
 
     <table>
         <tr> 
-            <th> Nombre </th> <th> Nombre de Usuario </th> <th> Correo </th> <th> Opciones </th>
+            <th> Nombre </th> <th> Correo </th> <th> #Sillas </th> <th> Hora </th> <th> Fecha </th>
         </tr> 
 
         {% for Listado_Users in Listado_Usuarios %}
 
             <tr>
-        
+
                 <td> {{ Listado_Users[1] }} </td> 
                 <td> {{ Listado_Users[2] }} </td>
+                <td> {{ Listado_Users[3] }} </td> 
                 <td> {{ Listado_Users[4] }} </td>
+                <td> {{ Listado_Users[5] }} </td> 
 
                 <td>
                     <a href=" {{ url_for ('Editar_Usuario', id = Listado_Users[0]) }} "> <button> Editar </button> </a>
