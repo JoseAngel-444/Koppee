@@ -9,7 +9,7 @@
 <body>
     
     {% if 'User' in session and (session['Type_User'] == 'administrador') %}
-    
+
     <nav>
         <ul>
             <li> <a href="{{ url_for('logout') }}" class="nav-item nav-link"> <button>Cerrar sesión </button></a></li>
@@ -24,7 +24,7 @@
 
             {% for message in get_flashed_messages() %}
 
-            <div class="alert {{ type_Flash }}">
+            <div class="alert {{ type_Flash }}" style="margin-top: -15px;">
                 <span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span>
                 {{ message }}
             </div>
@@ -33,11 +33,34 @@
 
             <form method="POST" action=" ">
 
+                <div class="form-group">
+                    <input value=" {{ data[1] }} " name="Name_Form" type="text" class="form-control bg-transparent border-primary p-4 text-white" disabled>
+                </div>
+                <div class="form-group">
+                    <input value=" {{data[2] }} " name="Email_Form" type="email" class="form-control bg-transparent border-primary p-4 text-white" disabled>
+                </div>
 
-                <label for="chk" aria-hidden="true">Modificar datos</label>
-                <input type="text" name="txt" value=" {{ data[1] }} " placeholder="Nombre de usuario" required>
-                <input type="email" name="Email" value=" {{ data[2] }} " placeholder="Correo electrónico" required>
+                <div class="form-group">
+                    <div class="date" id="date">
+                        <input name="Date_Form" type="date" class="form-control bg-transparent border-primary p-4 datetimepicker-input text-white" placeholder="Fecha" data-target="#date" data-toggle="datetimepicker" required/>
+                    </div>
+                </div>
+                <div class="form-group">            
+                    <div class="time" id="time">
+                        <input name="Hora_Form" type="time" class="form-control bg-transparent border-primary p-4 datetimepicker-input text-white" placeholder="Hora" />
+                    </div>
+                </div>
                 
+                <div class="form-group form-group-reservation">
+                    <select name="Num_Personas" class="custom-select bg-transparent border-primary px-4 " style="height: 49px;">
+                        <option selected value="2">2 Personas</option>
+                        <option value="3">3 Personas</option>
+                        <option value="4">4 Personas</option>
+                        <option value="5">5 Personas</option>
+                        <option value="6">6 Personas</option>
+                    </select>
+                </div>
+
                 <button type="submit">Realizar Cambios</button>
 
             </form>

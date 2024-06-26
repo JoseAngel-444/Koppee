@@ -410,76 +410,64 @@ def Admin_View_Reservas():
 
     return render_template('Admin_Page_View_Reservas.html', Listado_Usuarios = Listado_Users)
 
-# @app.route('/Editar_Usuario/<int:id>', methods = ['GET','POST'])
-# def Editar_Usuario(id):
+@app.route('/Editar_Reserva/<int:id>', methods = ['GET','POST'])
+def Editar_Reserva(id):
 
-#     cursor = db.cursor()
-#     if request.method == 'POST':
+    cursor = db.cursor()
+    if request.method == 'POST':
 
-#         print("Esta entrando POST. ")
-#         Username = request.form ['txt']
-#         Email = request.form['Email']
+        print("Esta entrando POST. ")
 
-#         cursor = db.cursor()
-#         query = "SELECT Nombre_Cliente, Email_Cliente FROM Registro WHERE (Email_Cliente = %s OR Nombre_Cliente = %s) AND Rol_Usuario = 'cliente' And ID_Registro != %s"
-#         cursor.execute(query, (Email, Username, id))
-#         Is_Available = cursor.fetchone()
+        Fecha_Reserva = request.form['Date_Form']
+        Hora_Reserva = request.form['Hora_Form']
+        Num_Personas_Reserva = request.form['Num_Personas']
+        
+        cursor = db.cursor()
+        query = "SELECT Cantidad_De_Sillas, Fecha_Reserva FROM Reservas WHERE Cantidad_De_Sillas = %s AND Fecha_Reserva = %s"
+        cursor.execute(query, (Num_Personas_Reserva, Fecha_Reserva))
+        Is_Available = cursor.fetchone()
 
-#         if Is_Available is None:
+        if Is_Available is None:
 
-#             Update_Data = "UPDATE Registro set Nombre_Cliente = %s, Email_Cliente = %s Where ID_Registro = %s"
-#             cursor.execute(Update_Data,(Username, Email, id))
-#             db.commit()
-#             type_Flash = "alert-success"
-#             flash("Datos modificados exitosamente. ")
+            Update_Data = "UPDATE Reservas set Fecha_Reserva = %s, Hora_Reserva = %s, Num_Personas_Reserva = %s Where ID_Reserva = %s"
+            cursor.execute(Update_Data,(Fecha_Reserva, Hora_Reserva, Num_Personas_Reserva, id))
+            db.commit()
+            type_Flash = "alert-success"
+            flash("Datos modificados exitosamente. ")
 
-#             return redirect(url_for('Admin_View'))
+            return redirect(url_for('Admin_View_Reservas'))
 
-#         else:
+        else:
 
-#             type_Flash = "alert-danger"
-#             print(Is_Available[0], Is_Available[1])
+            type_Flash = "alert-danger"
+            print(Is_Available[0], Is_Available[1])
+            
+            flash("La mesa para " + Num_Personas_Reserva + " ya fue reservada para el día seleccionado. (" + Fecha_Reserva + ").")
 
-#             if ((Is_Available[0] == Username) and (Is_Available[1] == Email)):
+    else:
+        #obtener los datos de la persona que va a editar
+        type_Flash = "alert"
 
-#                 flash("Email y nombre de usuario ya registrados. ")
+        print("Esta llegando como GET. ")
+        cursor = db.cursor()
+        cursor.execute('SELECT * FROM Reservas WHERE ID_Reserva = %s', (id,))
+        data = cursor.fetchall()
 
-#             elif (Is_Available[0] == Username):
+        print(data)
 
-#                 flash("Nombre de usuario ya registrado. ")
+    cursor = db.cursor()
+    cursor.execute('SELECT Reservas.ID_Reserva, Registro.Nombre_Cliente, Registro.Email_Cliente, Reservas.Cantidad_De_Sillas, Reservas.Fecha_Reserva, Reservas.Hora_Reserva FROM Registro INNER JOIN Reservas ON ID_Registro = Cliente_ID_F WHERE Reservas.ID_Reserva = %s', (id,))
+    data = cursor.fetchall()
 
-#             elif (Is_Available[1] == Email):
-
-#                 flash("Email ya registrado. ")
-
-#             else:
-
-#                 flash("Dev Log 001")
-
-#     else:
-#         #obtener los datos de la persona que va a editar
-#         type_Flash = "alert"
-
-#         print("Esta llegando como GET. ")
-#         cursor = db.cursor()
-#         cursor.execute('SELECT * FROM registro WHERE ID_Registro = %s', (id,))
-#         data = cursor.fetchall()
-
-#         print(data)
-
-#     cursor = db.cursor()
-#     cursor.execute('SELECT * FROM registro WHERE ID_Registro = %s', (id,))
-#     data = cursor.fetchall()
-
-#     return render_template('Editar.html', data = data[0], type_Flash = type_Flash)
+    return render_template('Editar_Reserva.html', data = data[0], type_Flash = type_Flash)
 
 @app.route('/Eliminar_Reserva/<int:id>', methods=['GET'])
 def Eliminar_Reserva(id):
 
     cursor = db.cursor();
-    cursor.execute('DELETE FROM Registro WHERE ID_Registro = %s', (id,))
+    cursor.execute('DELETE FROM Reservas WHERE ID_Reserva = %s', (id,))
     db.commit()
-    return redirect(url_for('Admin_View'))
+    return redirect(url_for('Admin_View_Reservas'))
 
 
 
