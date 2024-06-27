@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{url_for('static',filename='css/login.css')}}">
+
+</head>
+<body>
+    
+    {% if 'User' in session and (session['Type_User'] == 'administrador') %}
+    
+    <nav>
+        <ul>
+            <li> <a href="{{ url_for('logout') }}" class="nav-item nav-link"> <button>Cerrar sesión </button></a></li>
+            <li> <a href="{{ url_for('Admin_View') }}" class="nav-item nav-link"> <button> Usuarios </button></a></li>
+            <li> <a href="{{ url_for('Admin_View_Reservas') }}" class="nav-item nav-link"> <button> Reservas </button> </a></li>
+        </ul>
+    </nav>
+
+    <div class="main">
+        <input type="checkbox" id="chk" aria-hidden="true">
+        <div class="signup">
+
+            {% for message in get_flashed_messages() %}
+
+            <div class="alert {{ type_Flash }}">
+                <span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span>
+                {{ message }}
+            </div>
+
+            {% endfor %}
+
+            <form method="POST" action=" ">
+
+
+                <label for="chk" aria-hidden="true">Modificar datos</label>
+                <input type="text" name="txt" value=" {{ data[1] }} " placeholder="Nombre de usuario" required>
+                <input type="email" name="Email" value=" {{ data[2] }} " placeholder="Correo electrónico" required>
+                
+                <button type="submit">Realizar Cambios</button>
+
+            </form>
+
+        </div>
+    </div>
+
+    {% else %}
+
+        {% if 'User' in session %}
+            <a href="{{ url_for('logout') }}" class="nav-item nav-link">Cerrar sesión</a>
+        {% else %}
+            <a href="{{ url_for('login') }}" class="nav-item nav-link">Iniciar sesión</a>
+        {% endif %}
+            <h1> Acceso denegado </h1>
+            <p> Uppss parece que estas intentando a acceder a información que necesita permisos de administrador. </p>
+            <a href=" {{ url_for('index') }}"> Volver al inicio </a>
+
+    {% endif %}
+
+</body>
+</html>

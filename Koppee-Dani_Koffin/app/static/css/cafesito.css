@@ -1,0 +1,170 @@
+body {
+	background: #8acdeb;
+}
+#container {
+	position: absolute;
+	top: 70%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+}
+.steam {
+  position: absolute;
+  height: 100px;
+  width: 100px;
+  border-radius: 50%;
+  background-color: #fff;
+  margin-top: 10px;
+  margin-left: 20px;
+  z-index: 0;
+  opacity: 0;
+}
+
+#steam1 {
+  -webkit-animation: steam1 4s ease-out infinite;
+  animation: steam1 4s ease-out infinite;
+}
+
+#steam3 {
+  -webkit-animation: steam1 4s ease-out 1s infinite;
+  animation: steam1 4s ease-out 1s infinite;
+}
+
+@-webkit-keyframes steam1 {
+  0% {transform: translateY(0) translateX(0) scale(0.25); opacity: 0.2;}
+  100% {transform: translateY(-200px) translateX(-20px) scale(1); opacity: 0;}
+}
+
+@keyframes steam1 {
+  0% {transform: translateY(0) translateX(0) scale(0.25); opacity: 0.2;}
+  100% {transform: translateY(-200px) translateX(-20px) scale(1); opacity: 0;}
+}
+
+#steam2 {
+  -webkit-animation: steam2 4s ease-out 0.5s infinite;
+  animation: steam2 4s ease-out 0.5s infinite;
+}
+
+#steam4 {
+  -webkit-animation: steam2 4s ease-out 1.5s infinite;
+  animation: steam2 4s ease-out 1.5s infinite;
+}
+
+@-webkit-keyframes steam2 {
+  0% {transform: translateY(0) translateX(0) scale(0.25); opacity: 0.2;}
+  100% {transform: translateY(-200px) translateX(20px) scale(1); opacity: 0;}
+}
+
+@keyframes steam2 {
+  0% {transform: translateY(0) translateX(0) scale(0.25); opacity: 0.2;}
+  100% {transform: translateY(-200px) translateX(20px) scale(1); opacity: 0;}
+}
+
+#cup {
+  z-index: 1;
+}
+
+#cup-body {
+  position: absolute;
+  height: 80px;
+  width: 120px;
+  border-radius: 0 0 150px 150px;
+  background-color: #fff;
+  margin: auto;
+  display: inline-block;
+  overflow: hidden;
+  z-index: 1;
+  margin-top: 40px;
+}
+
+#cup-shade {
+  position: relative;
+  height: 200px;
+  width: 100px;
+  background-color: #F3F3F3;
+  display: inline-block;
+  margin-left: 42%;
+  margin-top: -3px;
+  transform: rotate(50deg);
+  z-index: 1;
+}
+
+#cup-handle {
+  position: relative;
+  height: 40px;
+  width: 40px;
+  border-radius: 0 150px 150px 0;
+  border: 15px solid #F3F3F3;
+  margin-bottom: 95px;
+  margin-left: 110px;
+  display: inline-block;
+  margin-top: 40px;
+  z-index: 0;
+}
+
+#saucer {
+  position: absolute;
+  height: 10px;
+  width: 120px;  
+  border-radius: 0 0 100px 100px;
+  background-color: #F9F9F9;
+  margin-top: -65px;
+  margin-left: 5px;
+  z-index: 2;
+}
+
+#shadow {
+  height: 10px;
+  width: 120px;
+  border-radius: 50%;
+  margin-top: -55px;
+  margin-left: 3px;
+  background-color: #000000;
+}
+
+body {
+  background: #8acdeb;
+}
+
+/* Estilos para pantalla grande */
+@media (min-width: 992px) {
+  .display-1 {
+      font-size: 4rem; /* Ejemplo de ajuste de tamaño de letra para el título */
+  }
+  .carousel-item img {
+      max-width: 100%; /* Ajuste de tamaño máximo para las imágenes */
+      height: auto;
+  }
+}
+
+/* Estilos para pantalla mediana */
+@media (max-width: 991px) {
+  .display-1 {
+      font-size: 3rem; /* Tamaño diferente para el título en pantallas medianas */
+  }
+  .carousel-item img {
+      max-width: 100%; /* Ajuste de tamaño máximo para las imágenes */
+      height: auto;
+  }
+}
+
+/* Estilos para pantalla pequeña */
+@media (max-width: 768px) {
+  .display-1 {
+      font-size: 2.5rem; /* Tamaño diferente para el título en pantallas pequeñas */
+  }
+  .carousel-item img {
+      max-width: 100%; /* Ajuste de tamaño máximo para las imágenes */
+      height: auto;
+  }
+}
+
+/* Otros estilos específicos para dispositivos móviles o según necesidad */
+@media (max-width: 576px) {
+  .display-1 {
+      font-size: 2rem; /* Tamaño aún más reducido para pantallas muy pequeñas */
+  }
+  .carousel-item img {
+      max-width: 100%; /* Ajuste de tamaño máximo para las imágenes */
+      height: auto;
+  }
+}

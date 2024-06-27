@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <title> Listado de usuarios registrados </title>
+    
+    <link rel="icon" href="/coffee-shop-html-template/img/LogoCFT-Photoroom.png-Photoroom.png" type="image/gif" />
+    <link href="img/favicon.ico" rel="icon">
+
+    
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@200;400&family=Roboto:wght@400;500;700&display=swap" rel="stylesheet"> 
+
+    
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css" rel="stylesheet">
+
+    
+    <link href="{{url_for('static',filename='lib/owlcarousel/assets/owl.carousel_min.css')}}" rel="stylesheet">
+    <link href="{{url_for('static',filename='lib/tempusdominus/css/tempusdominus-bootstrap-4_min.css')}}" rel="stylesheet" />
+
+    <link rel="stylesheet" href="{{url_for('static',filename='/css/style_min.css')}}">
+    
+</head>
+<body>
+
+    {% if 'User' in session and (session['Type_User'] == 'administrador') %}
+    
+    <nav>
+        <ul>
+            <li> <a href="{{ url_for('logout') }}" class="nav-item nav-link">Cerrar sesión</a></li>
+            <li> <a href="{{ url_for('Admin_View_Reservas') }}" class="nav-item nav-link">Reservas</a></li>
+        </ul>
+    </nav>
+
+    <table>
+        <tr> 
+            <th> Nombre </th> <th> Nombre de Usuario </th> <th> Correo </th> <th> Opciones </th>
+        </tr> 
+
+        {% for Listado_Users in Listado_Usuarios %}
+
+            <tr>
+                <td> {{ Listado_Users[1] }} </td> 
+                <td> {{ Listado_Users[2] }} </td>
+                <td> {{ Listado_Users[4] }} </td>
+
+                <td>
+                    <a href=" {{ url_for ('Editar_Usuario', id = Listado_Users[0]) }} "> <button> Editar </button> </a>
+                    <a href=" {{ url_for ('Eliminar_Usuario', id = Listado_Users[0] )}} "> <button> Eliminar </button> </a>
+                </td>
+    
+            </tr>
+
+        {% endfor %}
+        
+    </table>
+
+    {% else %}
+
+        {% if 'User' in session %}
+            <a href="{{ url_for('logout') }}" class="nav-item nav-link">Cerrar sesión</a>
+        {% else %}
+            <a href="{{ url_for('login') }}" class="nav-item nav-link">Iniciar sesión</a>
+        {% endif %}
+            <h1> Acceso denegado </h1>
+            <p> Uppss parece que estas intentando a acceder a información que necesita permisos de administrador. </p>
+            <a href=" {{ url_for('index') }}"> Volver al inicio </a>
+
+        {% endif %}
+
+</body>
+</html>

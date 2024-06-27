@@ -1,0 +1,462 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <title>KOFFIN - Sitio web para tu cafetería</title>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <meta content="Free Website Template" name="keywords">
+    <meta content="Free Website Template" name="description">
+
+   
+    <link href="img/favicon.ico" rel="icon">
+
+   
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@200;400&family=Roboto:wght@400;500;700&display=swap" rel="stylesheet"> 
+
+    
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css" rel="stylesheet">
+
+    
+    <link href="{{url_for('static',filename='lib/owlcarousel/assets/owl.carousel_min.css')}}" rel="stylesheet">
+    <link href="{{url_for('static',filename='lib/tempusdominus/css/tempusdominus-bootstrap-4_min.css')}}" rel="stylesheet" />
+
+    
+    <link rel="stylesheet" href="{{url_for('static',filename='/css/style_min.css')}}">
+
+    <link rel="icon" href="{{url_for('static',filename='/img/LogoCFT-Photoroom.jpg')}}" type="image/gif" />
+</head>
+
+<body>
+    
+    <div class="container-fluid p-0 nav-bar">
+        <nav class="navbar navbar-expand-lg bg-none navbar-dark py-3">
+            <a href="{{ url_for('index') }}" class="navbar-brand px-lg-4 m-0">
+                <h1 class="m-0 display-4 text-uppercase text-white">KOFFIN</h1>
+            </a>
+            <button type="button" class="navbar-toggler" data-toggle="collapse" data-target="#navbarCollapse">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse justify-content-between" id="navbarCollapse">
+                <div class="navbar-nav ml-auto p-4">
+                    <a href="{{ url_for('index') }}" class="nav-item nav-link">Inicio</a>
+                    <a href="{{ url_for('about') }}" class="nav-item nav-link">Acerca de</a>
+                    <a href="{{ url_for('servicio') }}" class="nav-item nav-link">Servicios</a>
+                    <a href="{{ url_for('menu') }}" class="nav-item nav-link">Menú</a>
+                    <div class="nav-item dropdown">
+                        <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">Paginas</a>
+                        <div class="dropdown-menu text-capitalize">
+                            <a href="{{ url_for('reservation') }}" class="dropdown-item">Reservación</a>
+                            <a href="{{ url_for('testimonial') }}" class="dropdown-item">Referencias</a>
+                        </div>
+                    </div>
+                    <a href="{{ url_for('contact') }}" class="nav-item nav-link">Contactos</a>
+                    <a href="{{ url_for('logout') }}" class="nav-item nav-link btn btn-outline-primary">Cerrar Sesión</a>
+                    
+                </div>
+            </div>
+        </nav>
+    </div>
+    
+
+
+    <div class="container-fluid page-header mb-5 position-relative overlay-bottom">
+        <div class="d-flex flex-column align-items-center justify-content-center pt-0 pt-lg-5" style="min-height: 400px">
+            <h1 class="display-4 mb-3 mt-0 mt-lg-5 text-white text-uppercase">Menú</h1>
+            <div class="d-inline-flex mb-lg-5">
+                <p class="m-0 text-white"><a class="text-white" href="">Hogar</a></p>
+                <p class="m-0 text-white px-2">/</p>
+                <p class="m-0 text-white">Menú</p>
+            </div>
+        </div>
+    </div>
+    
+
+
+    <div class="container-fluid pt-5">
+        <div class="container">
+            <div class="section-title">
+                <h4 class="text-primary text-uppercase" style="letter-spacing: 5px;">Menú y Precios</h4>
+                <h1 class="display-4">Precios competitivos</h1>
+            </div>
+            <div class="row">
+                <div class="col-lg-6">
+                    <h1 class="mb-5">Café caliente</h1>
+                    <div class="row align-items-center mb-5">
+                        <div class="col-4 col-sm-3">
+                            <img class="w-100 rounded-circle mb-3 mb-sm-0" src="{{url_for('static',filename='/img/menu-1.jpg')}}" alt="">
+                            <h5 class="menu-price">$2000</h5>
+                        </div>
+                        <div class="col-8 col-sm-9">
+                            <h4>Café negro</h4>
+                            <p class="m-0">Sumérgete en la intensidad de nuestro café negro, una mezcla robusta que despierta tus sentidos con su aroma profundo y su sabor audaz.</p>
+                        </div>
+                    </div>
+                    <div class="row align-items-center mb-5">
+                        <div class="col-4 col-sm-3">
+                            <img class="img-fluid rounded-circle mb-3 mb-sm-0" src="{{url_for('static',filename='/img/menu-2.jpg')}}" alt="">
+                            <h5 class="menu-price">$4500</h5>
+                        </div>
+                        <div class="col-8 col-sm-9">
+                            <h4>Café Chocolate</h4>
+                            <p class="m-0">Déjate tentar por el delicioso matrimonio entre el café y el chocolate en nuestra exquisita bebida de Café Chocolate. Cada sorbo es un viaje de indulgencia, 
+                                fusionando la suavidad del chocolate con la energía del café.</p>
+                        </div>
+                    </div>
+                    <div class="row align-items-center mb-5">
+                        <div class="col-4 col-sm-3">
+                            <img class="w-100 rounded-circle mb-3 mb-sm-0" src="{{url_for('static',filename='/img/menu-3.jpg')}}" alt="">
+                            <h5 class="menu-price">$3000</h5>
+                        </div>
+                        <div class="col-8 col-sm-9">
+                            <h4>Café con leche</h4>
+                            <p class="m-0">Disfruta de un abrazo reconfortante en forma de Café con leche. 
+                                Nuestra mezcla perfecta de café suave y leche cremosa te envuelve en un sabor acogedor que te hace sentir como en casa.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-6">
+                    <h1 class="mb-5">Café frío</h1>
+                    <div class="row align-items-center mb-5">
+                        <div class="col-4 col-sm-3">
+                            <img class="w-100 rounded-circle mb-3 mb-sm-0" src="{{url_for('static',filename='/img/menu-1.jpg')}}" alt="">
+                            <h5 class="menu-price">$4000</h5>
+                        </div>
+                        <div class="col-8 col-sm-9">
+                            <h4>Café negro</h4>
+                            <p class="m-0">Refréscate y revive con nuestro Café frío, una explosión de frescura en cada sorbo. 
+                                Perfecto para esos días calurosos o para aquellos que prefieren una experiencia de café refrescante.</p>
+                        </div>
+                    </div>
+                    <div class="row align-items-center mb-5">
+                        <div class="col-4 col-sm-3">
+                            <img class="w-100 rounded-circle mb-3 mb-sm-0" src="{{url_for('static',filename='/img/menu-2.jpg')}}" alt="">
+                            <h5 class="menu-price">$5000</h5>
+                        </div>
+                        <div class="col-8 col-sm-9">
+                            <h4>Café chocolate</h4>
+                            <p class="m-0">Sumérgete en el placer helado con nuestro Café Chocolate frío. 
+                                La combinación irresistible de café con el toque dulce y refrescante del chocolate te envuelve en una experiencia deliciosa y refrescante.</p>
+                        </div>
+                    </div>
+                    <div class="row align-items-center mb-5">
+                        <div class="col-4 col-sm-3">
+                            <img class="w-100 rounded-circle mb-3 mb-sm-0" src="{{url_for('static',filename='/img/menu-3.jpg')}}" alt="">
+                            <h5 class="menu-price">$3500</h5>
+                        </div>
+                        <div class="col-8 col-sm-9">
+                            <h4>Café con leche</h4>
+                            <p class="m-0">Refréscate con la suavidad reconfortante de nuestro Café con Leche Frío. La mezcla perfecta de café y leche fría te ofrece un equilibrio refrescante y satisfactorio en cada sorbo.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+
+
+
+    <div class="container-fluid footer text-white mt-5 pt-5 px-0 position-relative overlay-top">
+        <div class="row mx-0 pt-5 px-sm-3 px-lg-5 mt-4">
+            <div class="col-lg-3 col-md-6 mb-5">
+                <h4 class="text-white text-uppercase mb-4" style="letter-spacing: 3px;">Ponte en contacto</h4>
+                <p><i class="fa fa-map-marker-alt mr-2"></i>Colombia - Bogota DC - calle: 43 AV 7</p>
+                <p><i class="fa fa-phone-alt mr-2"></i>321-249-6589</p>
+                <p class="m-0"><i class="fa fa-envelope mr-2"></i>KOFFIN149@gmail.com</p>
+            </div>
+            <div class="col-lg-3 col-md-6 mb-5">
+                <h4 class="text-white text-uppercase mb-4" style="letter-spacing: 3px;">Síguenos</h4>
+                <p>No olvides seguirnos en nuestras redes sociales para que no te pierdas de nuestras grandes promociones.</p>
+                <div class="d-flex justify-content-start">
+                    <a class="btn btn-lg btn-outline-light btn-lg-square mr-2" href="#"><i class="fab fa-twitter"></i></a>
+                    <a class="btn btn-lg btn-outline-light btn-lg-square mr-2" href="https://www.facebook.com/profile.php?id=61558557609401"><i class="fab fa-facebook-f"></i></a>
+                    <a class="btn btn-lg btn-outline-light btn-lg-square mr-2" href="#"><i class="fab fa-linkedin-in"></i></a>
+                    <a class="btn btn-lg btn-outline-light btn-lg-square" href="https://www.instagram.com/KOFFINcafe?igsh=MXZuNDZncWd2c2x6bA=="><i class="fab fa-instagram"></i></a>
+                </div>
+            </div>
+            <div class="col-lg-3 col-md-6 mb-5">
+                <h4 class="text-white text-uppercase mb-4" style="letter-spacing: 3px;">Horario de apertura</h4>
+                <div>
+                    <h6 class="text-white text-uppercase">Lunes - Viernes</h6>
+                    <p>8.00 AM - 8.00 PM</p>
+                    <h6 class="text-white text-uppercase">Sábado - Domingo</h6>
+                    <p>2.00 PM - 8.00 PM</p>
+                </div>
+            </div>
+            
+
+            <div class="col-lg-3 col-md-6 mb-5">
+                <h4 class="text-white text-uppercase mb-4" style="letter-spacing: 3px;">KOFFIN</h4>
+                
+                <img class="img-fluid rounded-circle mb-3 mb-sm-0" src="{{url_for('static',filename='/img/LOGO.jpg')}}" alt="Disfruta de nuestra imagen representativa" style="width: 200px; height:auto" class="img-fluid mb-3">
+                <div class="w-100">
+                    <div class="input-group">
+                            
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+
+        <div class="container-fluid text-center text-white border-top mt-4 py-4 px-sm-3 px-md-5" style="border-color: rgba(256, 256, 256, .1) !important;">
+            <p class="mb-2 text-white">Derechos de autor &copy; <a class="font-weight-bold" href="#">Dominio</a>. Todos los derechos reservados.</a></p>
+            <p class="m-0 text-white">Diseñado por <a class="font-weight-bold" href="#">@Jose Angel, @Diego Mesa, @Daniel Cruz & @Johan Gonzalez</a></p>
+        </div>
+    </div>
+    
+
+
+
+    <a href="#" class="btn btn-lg btn-primary btn-lg-square back-to-top"><i class="fa fa-angle-double-up"></i></a>
+
+
+    <!-- JavaScript Libraries -->
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.bundle.min.js"></script>
+    <script src="{{url_for('static',filename='/lib/easing/easing.min.js')}}"></script>
+    <script src="{{url_for('static',filename='/lib/waypoints/waypoints.min.js')}}"></script>
+    <script src="{{url_for('static',filename='/lib/owlcarousel/owl.carousel.min.js')}}"></script>
+    <script src="{{url_for('static',filename='/lib/tempusdominus/js/moment.min.js')}}"></script>
+    <script src="{{url_for('static',filename='/lib/tempusdominus/js/moment-timezone.min.js')}}"></script>
+    <script src="{{url_for('static',filename='/lib/tempusdominus/js/tempusdominus-bootstrap-4.min.js')}}"></script>
+
+    <!-- Contact Javascript File -->
+    <script src="{{url_for('static',filename='/mail/jqBootstrapValidation.min.js')}}"></script>
+    <script src="{{url_for('static',filename='/mail/contact.js')}}"></script>
+
+    <!-- Template Javascript -->
+    <script src="{{url_for('static',filename='/js/main.js')}}"></script>
+</body>
+
+</html><!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <title>KOFFIN - Sitio web para tu cafeteria</title>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <meta content="Free Website Template" name="keywords">
+    <meta content="Free Website Template" name="description">
+
+   
+    <link href="img/favicon.ico" rel="icon">
+
+   
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@200;400&family=Roboto:wght@400;500;700&display=swap" rel="stylesheet"> 
+
+    
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css" rel="stylesheet">
+
+    
+    <link href="{{url_for('static',filename='lib/owlcarousel/assets/owl.carousel_min.css')}}" rel="stylesheet">
+    <link href="{{url_for('static',filename='lib/tempusdominus/css/tempusdominus-bootstrap-4_min.css')}}" rel="stylesheet" />
+
+    
+    <link rel="stylesheet" href="{{url_for('static',filename='/css/style_min.css')}}">
+
+    <link rel="icon" href="{{url_for('static',filename='/img/LogoCFT-Photoroom.jpg')}}" type="image/gif" />
+</head>
+
+<body>
+    
+    <div class="container-fluid p-0 nav-bar">
+        <nav class="navbar navbar-expand-lg bg-none navbar-dark py-3">
+            <a href="{{ url_for('index') }}" class="navbar-brand px-lg-4 m-0">
+                <h1 class="m-0 display-4 text-uppercase text-white">KOFFIN</h1>
+            </a>
+            <button type="button" class="navbar-toggler" data-toggle="collapse" data-target="#navbarCollapse">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse justify-content-between" id="navbarCollapse">
+                <div class="navbar-nav ml-auto p-4">
+                    <a href="{{ url_for('index') }}" class="nav-item nav-link">Inicio</a>
+                    <a href="{{ url_for('about') }}" class="nav-item nav-link">Acerca de</a>
+                    <a href="{{ url_for('servicio') }}" class="nav-item nav-link">Servicios</a>
+                    <a href="{{ url_for('menu') }}" class="nav-item nav-link">Menu</a>
+                    <div class="nav-item dropdown">
+                        <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">Paginas</a>
+                        <div class="dropdown-menu text-capitalize">
+                            <a href="{{ url_for('reservation') }}" class="dropdown-item">Reservación</a>
+                            <a href="{{ url_for('testimonial') }}" class="dropdown-item">Referencias</a>
+                        </div>
+                    </div>
+                    <a href="{{ url_for('contact') }}" class="nav-item nav-link">Contactos</a>
+                </div>
+            </div>
+        </nav>
+    </div>
+    
+
+
+    <div class="container-fluid page-header mb-5 position-relative overlay-bottom">
+        <div class="d-flex flex-column align-items-center justify-content-center pt-0 pt-lg-5" style="min-height: 400px">
+            <h1 class="display-4 mb-3 mt-0 mt-lg-5 text-white text-uppercase">Menú</h1>
+            <div class="d-inline-flex mb-lg-5">
+                <p class="m-0 text-white"><a class="text-white" href="">Hogar</a></p>
+                <p class="m-0 text-white px-2">/</p>
+                <p class="m-0 text-white">Menu</p>
+            </div>
+        </div>
+    </div>
+    
+
+
+    <div class="container-fluid pt-5">
+        <div class="container">
+            <div class="section-title">
+                <h4 class="text-primary text-uppercase" style="letter-spacing: 5px;">Menú y Precios</h4>
+                <h1 class="display-4">Precios competitivos</h1>
+            </div>
+            <div class="row">
+                <div class="col-lg-6">
+                    <h1 class="mb-5">Café caliente</h1>
+                    <div class="row align-items-center mb-5">
+                        <div class="col-4 col-sm-3">
+                            <img class="w-100 rounded-circle mb-3 mb-sm-0" src="{{url_for('static',filename='/img/menu-1.jpg')}}" alt="">
+                            <h5 class="menu-price">$2000</h5>
+                        </div>
+                        <div class="col-8 col-sm-9">
+                            <h4>Café negro</h4>
+                            <p class="m-0">Sumérgete en la intensidad de nuestro café negro, una mezcla robusta que despierta tus sentidos con su aroma profundo y su sabor audaz.</p>
+                        </div>
+                    </div>
+                    <div class="row align-items-center mb-5">
+                        <div class="col-4 col-sm-3">
+                            <img class="w-100 rounded-circle mb-3 mb-sm-0" src="{{url_for('static',filename='/img/menu-2.jpg')}}" alt="">
+                            <h5 class="menu-price">$4500</h5>
+                        </div>
+                        <div class="col-8 col-sm-9">
+                            <h4>Café Chocolate</h4>
+                            <p class="m-0">Déjate tentar por el delicioso matrimonio entre el café y el chocolate en nuestra exquisita bebida de Café Chocolate. Cada sorbo es un viaje de indulgencia, 
+                                fusionando la suavidad del chocolate con la energía del café.</p>
+                        </div>
+                    </div>
+                    <div class="row align-items-center mb-5">
+                        <div class="col-4 col-sm-3">
+                            <img class="w-100 rounded-circle mb-3 mb-sm-0" src="{{url_for('static',filename='/img/menu-3.jpg')}}" alt="">
+                            <h5 class="menu-price">$3000</h5>
+                        </div>
+                        <div class="col-8 col-sm-9">
+                            <h4>Café con leche</h4>
+                            <p class="m-0">Disfruta de un abrazo reconfortante en forma de Café con Leche. 
+                                Nuestra mezcla perfecta de café suave y leche cremosa te envuelve en un sabor acogedor que te hace sentir como en casa.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-6">
+                    <h1 class="mb-5">Café frio</h1>
+                    <div class="row align-items-center mb-5">
+                        <div class="col-4 col-sm-3">
+                            <img class="w-100 rounded-circle mb-3 mb-sm-0" src="{{url_for('static',filename='/img/menu-1.jpg')}}" alt="">
+                            <h5 class="menu-price">$4000</h5>
+                        </div>
+                        <div class="col-8 col-sm-9">
+                            <h4>Café negro</h4>
+                            <p class="m-0">Refréscate y revive con nuestro Café Frío, una explosión de frescura en cada sorbo. 
+                                Perfecto para esos días calurosos o para aquellos que prefieren una experiencia de café refrescante.</p>
+                        </div>
+                    </div>
+                    <div class="row align-items-center mb-5">
+                        <div class="col-4 col-sm-3">
+                            <img class="w-100 rounded-circle mb-3 mb-sm-0" src="{{url_for('static',filename='/img/menu-2.jpg')}}" alt="">
+                            <h5 class="menu-price">$5000</h5>
+                        </div>
+                        <div class="col-8 col-sm-9">
+                            <h4>Café Chocolate</h4>
+                            <p class="m-0">Sumérgete en el placer helado con nuestro Café Chocolate Frío. 
+                                La combinación irresistible de café con el toque dulce y refrescante del chocolate te envuelve en una experiencia deliciosa y refrescante.</p>
+                        </div>
+                    </div>
+                    <div class="row align-items-center mb-5">
+                        <div class="col-4 col-sm-3">
+                            <img class="w-100 rounded-circle mb-3 mb-sm-0" src="{{url_for('static',filename='/img/menu-3.jpg')}}" alt="">
+                            <h5 class="menu-price">$3500</h5>
+                        </div>
+                        <div class="col-8 col-sm-9">
+                            <h4>Café con leche</h4>
+                            <p class="m-0">Refréscate con la suavidad reconfortante de nuestro Café con Leche Frío. La mezcla perfecta de café y leche fría te ofrece un equilibrio refrescante y satisfactorio en cada sorbo.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+
+
+
+    <div class="container-fluid footer text-white mt-5 pt-5 px-0 position-relative overlay-top">
+        <div class="row mx-0 pt-5 px-sm-3 px-lg-5 mt-4">
+            <div class="col-lg-3 col-md-6 mb-5">
+                <h4 class="text-white text-uppercase mb-4" style="letter-spacing: 3px;">Ponte en contacto</h4>
+                <p><i class="fa fa-map-marker-alt mr-2"></i>Colombia - Bogota DC - calle: 43 AV 7</p>
+                <p><i class="fa fa-phone-alt mr-2"></i>321-249-6589</p>
+                <p class="m-0"><i class="fa fa-envelope mr-2"></i>KOFFIN149@gmail.com</p>
+            </div>
+            <div class="col-lg-3 col-md-6 mb-5">
+                <h4 class="text-white text-uppercase mb-4" style="letter-spacing: 3px;">Síguenos</h4>
+                <p>No olvides seguirnos en nuestras redes sociales para que no te pierdas de nuestras grandes promociones.</p>
+                <div class="d-flex justify-content-start">
+                    <a class="btn btn-lg btn-outline-light btn-lg-square mr-2" href="#"><i class="fab fa-twitter"></i></a>
+                    <a class="btn btn-lg btn-outline-light btn-lg-square mr-2" href="https://www.facebook.com/profile.php?id=61558557609401"><i class="fab fa-facebook-f"></i></a>
+                    <a class="btn btn-lg btn-outline-light btn-lg-square mr-2" href="#"><i class="fab fa-linkedin-in"></i></a>
+                    <a class="btn btn-lg btn-outline-light btn-lg-square" href="https://www.instagram.com/KOFFINcafe?igsh=MXZuNDZncWd2c2x6bA=="><i class="fab fa-instagram"></i></a>
+                </div>
+            </div>
+            <div class="col-lg-3 col-md-6 mb-5">
+                <h4 class="text-white text-uppercase mb-4" style="letter-spacing: 3px;">Horario de apertura</h4>
+                <div>
+                    <h6 class="text-white text-uppercase">Lunes - Viernes</h6>
+                    <p>8.00 AM - 8.00 PM</p>
+                    <h6 class="text-white text-uppercase">Sábado - Domingo</h6>
+                    <p>2.00 PM - 8.00 PM</p>
+                </div>
+            </div>
+            <div class="col-lg-3 col-md-6 mb-5">
+                <h4 class="text-white text-uppercase mb-4" style="letter-spacing: 3px;">Boletín</h4>
+                <p>Únete a nuestro boletin.</p>
+                <div class="w-100">
+                    <div class="input-group">
+                        <input type="text" class="form-control border-light" style="padding: 25px;" placeholder="Su correo">
+                        <div class="input-group-append">
+                            <button class="btn btn-primary font-weight-bold px-3">Únete</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="container-fluid text-center text-white border-top mt-4 py-4 px-sm-3 px-md-5" style="border-color: rgba(256, 256, 256, .1) !important;">
+            <p class="mb-2 text-white">Derechos de autor &copy; <a class="font-weight-bold" href="#">Dominio</a>. Todos los derechos reservados.</a></p>
+            <p class="m-0 text-white">Diseñado por <a class="font-weight-bold" href="#">@Jose Angel, @Diego Mesa, @Daniel Cruz & @Johan Gonzalez</a></p>
+        </div>
+    </div>
+    
+
+
+
+    <a href="#" class="btn btn-lg btn-primary btn-lg-square back-to-top"><i class="fa fa-angle-double-up"></i></a>
+
+
+    <!-- JavaScript Libraries -->
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.bundle.min.js"></script>
+    <script src="/app/static/lib/easing/easing.min.js"></script>
+    <script src="/app/static/lib/waypoints/waypoints.min.js"></script>
+    <script src="/app/static/lib/owlcarousel/owl.carousel.min.js"></script>
+    <script src="/app/static/lib/tempusdominus/js/moment.min.js"></script>
+    <script src="/app/static/js/moment-timezone.min.js"></script>
+    <script src="/app/static/lib/tempusdominus/js/tempusdominus-bootstrap-4.min.js"></script>
+
+    <!-- Contact Javascript File -->
+    <script src="/app/static/mail/jqBootstrapValidation.min.js"></script>
+    <script src="/app/static/mail/contact.js"></script>
+
+    <!-- Template Javascript -->
+    <script src="/app/static/js/main.js"></script>
+</body>
+
+</html>

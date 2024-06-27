@@ -1,0 +1,9 @@
+{% extends "Comentarios.html" %}
+
+{% block content %}
+  <h1>Editar comentario</h1>
+  <form action="" method="post">
+    <textarea name="text">{{ comment.text }}</textarea>
+    <button type="submit">Guardar cambios</button>
+  </form>
+{% endblock %}
